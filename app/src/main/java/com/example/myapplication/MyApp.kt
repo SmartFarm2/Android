@@ -20,11 +20,6 @@ class MyApp : Application() {
         } else {
             startService(intent);
         }
-        SocketManager.getInstance().addEvent(Socket.EVENT_CONNECT) {
-            SocketService.makeNotification(this, Constants.CONNECTED_KEY)
-        }
-        SocketManager.getInstance().addEvent(Socket.EVENT_DISCONNECT) {
-            SocketService.makeNotification(this, Constants.DISCONNECTED_KEY)
-        }
+
     }
 }

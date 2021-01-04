@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var bool = false;
         setContentView(R.layout.activity_main)
-        SocketManager.getInstance().addEvent(Constants.SOCKET_DOOR) {
+        SocketManager.getInstance(application).addEvent(Constants.SOCKET_DOOR) {
             val temp = it.get(0)
             CoroutineScope(Dispatchers.Main).launch {
                 test.text = "$temp"
@@ -23,13 +23,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         button.setOnClickListener {
-            SocketManager.getInstance().emit(Constants.SOCKET_DOOR_CHANGE, "1,$bool")
+            SocketManager.getInstance(application).emit(Constants.SOCKET_DOOR_CHANGE, "1,$bool")
             bool = !bool
         }
     }
 
     override fun onDestroy() {
-        SocketManager.getInstance().removeEvent(Constants.SOCKET_TEMP)
+        SocketManager.getInstance(application).removeEvent(Constants.SOCKET_TEMP)
         super.onDestroy()
     }
 }

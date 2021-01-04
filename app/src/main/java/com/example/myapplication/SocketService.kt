@@ -13,6 +13,7 @@ import com.example.myapplication.Constants
 import com.example.myapplication.Constants.channelID
 import com.example.myapplication.Constants.notificationId
 
+
 class SocketService : Service() {
     private var notificationManager: NotificationManager? = null
     private lateinit var socketManager: SocketManager
@@ -60,7 +61,7 @@ class SocketService : Service() {
 
     private fun initService() {
         createNotificationChannel()
-        socketManager = SocketManager.getInstance()
+        socketManager = SocketManager.getInstance(application)
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         updateAlterMessage(Messages.CONNECTING_TITLE, Messages.CONNECTING_CONTENT)
     }
