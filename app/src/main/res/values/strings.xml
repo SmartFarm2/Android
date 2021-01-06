@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="userFarmName">준혁이의 농장</string>
+    <string name="FarmWeatherIcon_Description">Farm Weather Icon</string>
+    <string name="temp_example">온도: 20°C</string>
+    <string name="hum_example">습도: 80%</string>
+    <string name="humidity_icon">humidity icon</string>
+    <string name="temperature_icon">temperature icon</string>
+    <string name="_0">0</string>
+    <string name="특이사항">특이사항</string>
+    <string name="not_have_current">현재 특이사항이 없습니다</string>
+    <string name="state_circle">state_circle</string>
+    <string name="message_box">messageBox</string>
+    <string name="mail_icon">mail_icon</string>
+    <string name="weather">날씨</string>
+    <string name="weather_info">맑음</string>
+    <string name="FarmState">농장 상태</string>
+    <string name="cctv_button">CCTV 보기</string>
+    <string name="light">조명</string>
+    <string name="info">정보</string>
+    <string name="turn_on">켜짐</string>
+    <string name="pump">펌프</string>
+    <string name="fan">환기팬</string>
+    <string name="door">개폐기</string>
 </resources>
