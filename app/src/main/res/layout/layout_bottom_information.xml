@@ -1,0 +1,68 @@
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="img"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="isOn"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/info_box_background"
+        android:elevation="0dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/weather_info"
+            android:src="@{img}"
+            tools:src="@drawable/ic_light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:text="@{name}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="조명" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@{isOn ? @drawable/state_circle : @drawable/error_state}"
+            tools:src="@drawable/state_circle"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:text="@{isOn ? `켜짐` : `꺼짐`}"
+            android:isBold="@{true}"
+            android:textColor="@{isOn ? @color/stateColor : @color/errorStateColor}"
+            android:textSize="15sp"
+            tools:text="켜짐"
+            tools:textColor="@color/stateColor"/>
+    </LinearLayout>
+</layout>

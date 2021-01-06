@@ -1,0 +1,64 @@
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="img"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="endPoint"
+            type="String" />
+
+        <variable
+            name="isBold"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/info_box_background"
+        android:elevation="0dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="12dp"
+            android:contentDescription="@string/weather_info"
+            android:src="@{img}"
+            tools:src="@drawable/ic_sun" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:text="@{name}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="@string/weather" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="20dp"
+            android:text="@{endPoint}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:isBold="@{isBold}"
+            tools:text="@string/weather_info" />
+    </LinearLayout>
+</layout>

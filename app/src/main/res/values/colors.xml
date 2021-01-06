@@ -10,5 +10,6 @@
     <color name="mainBackgroundColor">#FBFBFB</color>
     <color name="mailBoxColor">#CFCFCF</color>
     <color name="stateColor">#35B935</color>
+    <color name="errorStateColor">#E84F4C</color>
     <color name="stateTextColor">#777777</color>
 </resources>

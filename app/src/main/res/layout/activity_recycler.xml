@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="farmInfo"
+            type="com.example.myapplication.data.FarmData" />
+
+        <variable
+            name="items"
+            type="com.example.myapplication.data.SpecialList" />
+
+        <variable
+            name="info"
+            type="com.example.myapplication.data.FarmInfoData" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".RecyclerActivity">
+
+        <Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{farmInfo.name}"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="준혁이의 농장" />
+        </Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingHorizontal="35dp">
+
+                <!-- Top information-->
+                <include
+                    info="@{info}"
+                    layout="@layout/layout_infobox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="40dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
+                <!-- Special Boxs-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="특이사항"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    items="@{items.list}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/layout_special_card" />
+                <!-- Weather and CCTV -->
+                <include
+                    name="@{`날씨`}"
+                    endPoint="@{info.weather}"
+                    img="@{@drawable/ic_sun}"
+                    isBold="@{false}"
+                    layout="@layout/layout_settingbox" />
+
+                <include
+                    name="@{`농장 상태`}"
+                    endPoint="@{`CCTV 보기`}"
+                    img="@{@drawable/ic_farm_winter}"
+                    isBold="@{true}"
+                    layout="@layout/layout_settingbox" />
+                <!-- info Boxs-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="정보"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <include
+                    name="@{`조명`}"
+                    img="@{@drawable/ic_light}"
+                    isOn="@{info.light}"
+                    layout="@layout/layout_bottom_information" />
+
+                <include
+                    name="@{`펌프`}"
+                    img="@{@drawable/ic_pump}"
+                    isOn="@{info.pump}"
+                    layout="@layout/layout_bottom_information" />
+
+                <include
+                    name="@{`환기팬`}"
+                    img="@{@drawable/ic_fan}"
+                    isOn="@{info.fan}"
+                    layout="@layout/layout_bottom_information" />
+
+                <include
+                    name="@{`개폐기`}"
+                    img="@{@drawable/ic_door}"
+                    isOn="@{info.door}"
+                    layout="@layout/layout_bottom_information" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

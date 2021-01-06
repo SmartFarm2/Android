@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="info"
+            type="com.example.myapplication.data.FarmInfoData" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="52.5dp"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/ic_farm_winter" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/layout_information"
+                app:endPoint="@{`℃`}"
+                app:img="@{@drawable/ic_temp_cold_line}"
+                app:name="@{`온도`}"
+                app:value="@{info.temp}" />
+
+            <View
+                android:layout_marginVertical="5dp"
+                android:layout_width="200dp"
+                android:layout_height="1dp"
+                android:background="#707070" />
+
+            <include
+                layout="@layout/layout_information"
+                app:endPoint="@{`%`}"
+                app:img="@{@drawable/ic_rainy_line}"
+                app:name="@{`습도`}"
+                app:value="@{info.humi}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:background="@drawable/mail_background"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="21dp"
+                android:layout_height="15dp"
+                android:src="@{(info.message > 0) ? @drawable/ic_new_mail : @drawable/ic_mail }"
+                tools:src="@drawable/ic_mail" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{String.valueOf(info.message)}"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
