@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QrScanActivity">
+    tools:context=".QrRequestActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -33,19 +33,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/scanner_view"
-        android:layout_width="match_parent"
-        android:layout_height="308dp"
-        android:layout_marginTop="56dp"
-        app:autoFocusButtonVisible="false"
-        app:flashButtonVisible="false"
-        app:frameColor="#00FFFFFF"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/qr_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:maskColor="#4A4A4A" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/qr_scan_btn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/qr_scan_btn"
+        android:layout_marginBottom="36dp"
+        android:text="인식"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,9 +41,9 @@ class QrScanActivity : AppCompatActivity() {
             isFlashEnabled = false
 
             decodeCallback = DecodeCallback {
-                runOnUiThread {
-                    tv_textView.text = it.text
-                }
+                //서버주소 변경
+                Toast.makeText(this@QrScanActivity, "QR인식에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                finish()
             }
 
             errorCallback = ErrorCallback {
