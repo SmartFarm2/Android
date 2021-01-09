@@ -7,66 +7,44 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.example.myapplication.databinding.ActivityQrScanBinding
 import kotlinx.android.synthetic.main.activity_qr_scan.*
 
 private const val CAMERA_REQUEST_CODE = 101
 
 class QrScanActivity : AppCompatActivity() {
 
-    private lateinit var codeScanner : CodeScanner
+    private lateinit var binding: ActivityQrScanBinding
+    private lateinit var viewModel: QrScanActivityViewModel
+    private lateinit var viewModelFactory : QrScanActivityViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_qr_scan)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_qr_scan)
+
+        viewModelFactory = QrScanActivityViewModelFactory(application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(QrScanActivityViewModel::class.java)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         setupPermissions()
         codeScanner()
-    }
-
-    private fun codeScanner() {
-        codeScanner = CodeScanner(this, scanner_view)
-
-        codeScanner.apply {
-            camera = CodeScanner.CAMERA_BACK
-            formats = CodeScanner.ALL_FORMATS
-
-            autoFocusMode = AutoFocusMode.SAFE
-            scanMode = ScanMode.CONTINUOUS
-            isAutoFocusEnabled = true
-            isFlashEnabled = false
-
-            decodeCallback = DecodeCallback {
-                //서버주소 변경
-                Toast.makeText(this@QrScanActivity, "QR인식에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-
-            errorCallback = ErrorCallback {
-                runOnUiThread {
-                    Log.e("Main", "Camera initialzation error : ${it.message}")
-                }
-            }
-        }
 
         scanner_view.setOnClickListener {
-            codeScanner.startPreview()
+           viewModel.codeScanner.startPreview()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        codeScanner.startPreview()
-    }
 
-    override fun onPause() {
-        codeScanner.releaseResources()
-        super.onPause()
-    }
 
     private fun setupPermissions() {
         val permission = ContextCompat.checkSelfPermission(this,
