@@ -4,6 +4,10 @@
         <variable
             name="info"
             type="com.example.myapplication.data.FarmInfoData" />
+
+        <variable
+            name="myViewModel"
+            type="com.example.myapplication.viewmodel.MainActivityViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,7 +35,7 @@
                 app:endPoint="@{`℃`}"
                 app:img="@{@drawable/ic_temp_cold_line}"
                 app:name="@{`온도`}"
-                app:value="@{info.temp}" />
+                app:value="@{myViewModel.tempData}" />
 
             <View
                 android:layout_marginVertical="5dp"
@@ -44,13 +48,13 @@
                 app:endPoint="@{`%`}"
                 app:img="@{@drawable/ic_rainy_line}"
                 app:name="@{`습도`}"
-                app:value="@{info.humi}" />
+                app:value="@{myViewModel.humData}" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
             android:background="@drawable/mail_background"
             android:gravity="center">
 

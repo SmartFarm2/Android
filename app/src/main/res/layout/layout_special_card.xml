@@ -31,6 +31,7 @@
             android:layout_marginLeft="14dp"
             android:text="@{special.message != null ? special.message : `현재 특이사항이 없습니다.`}"
             android:textSize="16sp"
+            android:textColor="@color/stateTextColor"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="현재 특이사항이 없습니다." />

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">스마트 농장</string>
     <string name="userFarmName">준혁이의 농장</string>
     <string name="FarmWeatherIcon_Description">Farm Weather Icon</string>
     <string name="temp_example">온도: 20°C</string>
