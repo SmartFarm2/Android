@@ -16,16 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.CCTVActivity"></activity>
 
-        <service android:name=".network.SocketService" />
-        <!-- enabled : 외부 시스템이 알아서 receiver를 실행 -->
+        <service android:name=".network.SocketService" /> <!-- enabled : 외부 시스템이 알아서 receiver를 실행 -->
         <!-- exported : 외부 어플리케이션에서 사용가능하게 할 지 여부 -->
         <receiver android:name=".network.BootService">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

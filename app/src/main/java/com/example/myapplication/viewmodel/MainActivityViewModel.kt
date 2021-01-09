@@ -57,7 +57,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application): ViewMo
         SocketManager.getInstance(application).addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
                 door.value = it[0] as Boolean
-            }]
+            }
         }
     }
 

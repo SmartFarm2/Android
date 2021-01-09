@@ -9,7 +9,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.example.myapplication.MainActivity
+import com.example.myapplication.view.MainActivity
 import com.example.myapplication.data.Constants
 import com.example.myapplication.data.Constants.channelID
 import com.example.myapplication.data.Constants.notificationId

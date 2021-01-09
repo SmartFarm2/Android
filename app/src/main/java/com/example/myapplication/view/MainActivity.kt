@@ -1,27 +1,16 @@
-package com.example.myapplication
+package com.example.myapplication.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.R
 import com.example.myapplication.adapter.SpecialAdapter
 import com.example.myapplication.data.*
 import com.example.myapplication.databinding.ActivityRecyclerBinding
 import com.example.myapplication.viewmodel.MainActivityViewModel
 import com.example.myapplication.viewmodel.MainActivityViewModelFactory
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Log
-import com.google.android.exoplayer2.util.Util
-import com.google.common.net.HttpHeaders
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,5 +43,8 @@ class MainActivity : AppCompatActivity() {
             viewModel.setDoor(application)
         }
 
+        binding.cctvView.infoBox.setOnClickListener {
+            startActivity(Intent(this, CCTVActivity::class.java))
+        }
     }
 }

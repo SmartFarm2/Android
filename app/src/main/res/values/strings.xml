@@ -22,4 +22,5 @@
     <string name="pump">펌프</string>
     <string name="fan">환기팬</string>
     <string name="door">개폐기</string>
+    <string name="cctv">CCTV</string>
 </resources>
