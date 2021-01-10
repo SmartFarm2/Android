@@ -12,4 +12,5 @@
     <color name="stateColor">#35B935</color>
     <color name="errorStateColor">#E84F4C</color>
     <color name="stateTextColor">#777777</color>
+    <color name="mainButtonColor">#00D264</color>
 </resources>

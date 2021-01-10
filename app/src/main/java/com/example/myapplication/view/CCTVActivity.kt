@@ -3,7 +3,9 @@ package com.example.myapplication.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.net.toUri
+import androidx.databinding.DataBindingUtil
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivityCctvBinding
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -15,6 +17,8 @@ import com.google.common.net.HttpHeaders
 import kotlinx.android.synthetic.main.activity_cctv.*
 
 class CCTVActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityCctvBinding
 
     lateinit var playerView: PlayerView
     var player: SimpleExoPlayer? = null
@@ -32,7 +36,7 @@ class CCTVActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cctv)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_cctv)
 
         playerView = playerV
     }

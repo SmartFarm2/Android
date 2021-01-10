@@ -23,4 +23,13 @@
     <string name="fan">환기팬</string>
     <string name="door">개폐기</string>
     <string name="cctv">CCTV</string>
+    <string name="lock">lock</string>
+    <string name="setPassword">암호를 설정하세요.(4글자)</string>
+    <string name="password_hint">비밀번호</string>
+    <string name="text_size_4">4글자</string>
+    <string name="next">다음</string>
+    <string name="next_button">nextButton</string>
+    <string name="recognize">인식</string>
+    <string name="recognize_text">기기에 부착된 코드를 인식합니다</string>
+    <string name="farm_connect">농장 등록</string>
 </resources>

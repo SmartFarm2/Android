@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.app.Application
 import android.util.Log
+import com.example.myapplication.application.MyApp
 import com.example.myapplication.data.Constants
 import com.example.myapplication.network.SocketService
 import io.socket.client.IO

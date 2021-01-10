@@ -19,6 +19,6 @@ object Constants {
     const val DISCONNECTED_KEY = "DISCONNECTED"
     const val CONNECTING_KEY = "CONNECTING"
 
-
+    const val WEATHER_URL = "/weather"
 
 }
