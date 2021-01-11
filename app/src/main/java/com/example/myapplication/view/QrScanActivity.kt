@@ -88,7 +88,7 @@ class QrScanActivity : AppCompatActivity() {
         when (requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "허락해줘", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "카메라 권한을 허용해 주십시오.", Toast.LENGTH_SHORT).show()
                 }
                 else{
                     //성공
