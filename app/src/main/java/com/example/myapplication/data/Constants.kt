@@ -8,7 +8,7 @@ object Constants {
     const val channelDescription ="서버와 연결하기위한 서비스 입니다."
 
     const val SERVER_DATA_KEY = "SERVER_ADDRESS_KEY"
-    const val SERVER_ADDRESS = "http://14.45.130.117:3000/"
+    const val SERVER_ADDRESS = "DEFAULT_ADDRESS"
     const val SOCKET_TEMP = "temp"
     const val SOCKET_CYCLE = "cycle"
     const val SOCKET_CYCLE_CHANGE = "changeCycle"

@@ -21,7 +21,6 @@ class SocketManager(application : Application) {
         val options = IO.Options()
         options.transports = arrayOf(WebSocket.NAME)
         options.forceNew = true
-
         mSocket = IO.socket(MyApp.pref.serverAddress, options)
         SocketService.makeNotification(application.applicationContext, Constants.CONNECTING_KEY)
         addEvent(Socket.EVENT_CONNECT_ERROR) {
