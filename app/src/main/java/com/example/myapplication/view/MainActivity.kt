@@ -2,6 +2,7 @@ package com.example.myapplication.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -24,33 +25,44 @@ class MainActivity : AppCompatActivity() {
         binding.farmInfo = FarmData("양준혁")
         binding.items = SpecialList(listOf(SpecialData(false, "현재 특이사항이 없습니다")))
 
-        viewModelFactory = MainActivityViewModelFactory(20)
+        viewModelFactory = MainActivityViewModelFactory(20, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
 
-        binding.myViewModel = viewModel
-        binding.lifecycleOwner = this
-        binding.recycler.adapter = SpecialAdapter()
+        with(binding) {
+            myViewModel = viewModel
+            lifecycleOwner = this@MainActivity
+            recycler.adapter = SpecialAdapter()
+            cycle.infoBox.setOnClickListener {
+                viewModel.setCycle()
+            }
 
-        viewModel.getTemp(application)
-        viewModel.getCycle(application)
-        viewModel.getDoor(application)
-        viewModel.getWeather(this)
+            door.infoBox.setOnClickListener {
+                viewModel.setDoor()
+            }
 
-        binding.cycle.infoBox.setOnClickListener {
-            viewModel.setCycle(application)
+            cctvView.infoBox.setOnClickListener {
+                startActivity(Intent(this@MainActivity, CCTVActivity::class.java))
+            }
+
+            refreshView.setOnRefreshListener {
+                viewModel.getWeather()
+                refreshView.isRefreshing = false;
+            }
         }
 
-        binding.door.infoBox.setOnClickListener {
-            viewModel.setDoor(application)
+        with(viewModel) {
+            getWeather()
+            observing()
+            toasts.observe(this@MainActivity) {
+                it.getContentIfNotHandled()?.let {
+                    Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
+    }
 
-        binding.cctvView.infoBox.setOnClickListener {
-            startActivity(Intent(this, CCTVActivity::class.java))
-        }
-
-        binding.refreshView.setOnRefreshListener {
-            viewModel.getWeather(this)
-            binding.refreshView.isRefreshing = false;
-        }
+    override fun onDestroy() {
+        viewModel.deobserving()
+        super.onDestroy()
     }
 }

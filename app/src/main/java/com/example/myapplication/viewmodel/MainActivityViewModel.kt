@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.example.myapplication.SocketManager
 import com.example.myapplication.data.Constants
 import com.example.myapplication.data.WeatherData
@@ -20,7 +21,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
-class MainActivityViewModel(startingTemp: Int) : ViewModel() {
+class MainActivityViewModel(startingTemp: Int, application: Application) : ViewModel() {
+
+    lateinit var manager : SocketManager
 
     private var temp = MutableLiveData<Int>()
     val tempData: LiveData<Int>
@@ -38,9 +41,17 @@ class MainActivityViewModel(startingTemp: Int) : ViewModel() {
     val doorData: LiveData<Boolean>
         get() = door
 
+    private var secondDoor = MutableLiveData<Boolean>()
+    val secondDoorData: LiveData<Boolean>
+        get() = secondDoor
+
     private var weather = MutableLiveData<String>()
     val weatherData: LiveData<String>
         get() = weather
+
+    private var _toasts = MutableLiveData<Event<String>>()
+    val toasts : LiveData<Event<String>>
+    get() = _toasts
 
     private val retrofit: Retrofit = RetrofitClient.getInstance()
     private var weatherService: RetrofitService
@@ -53,10 +64,23 @@ class MainActivityViewModel(startingTemp: Int) : ViewModel() {
         cycle.value = true
         door.value = true
         weather.value = "맑음"
+        secondDoor.value = true
+
+        manager = SocketManager.getInstance(application)
     }
 
-    internal fun getTemp(application: Application) {
-        SocketManager.getInstance(application).addEvent(Constants.SOCKET_TEMP) {
+    fun observing() {
+        getTemp()
+        getCycle()
+        getDoor()
+    }
+    fun deobserving() {
+        manager.removeEvent(Constants.SOCKET_DOOR)
+        manager.removeEvent(Constants.SOCKET_CYCLE)
+        manager.removeEvent(Constants.SOCKET_TEMP)
+    }
+    internal fun getTemp() {
+        manager.addEvent(Constants.SOCKET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
                 temp.value = it[0] as Int
                 hum.value = it[0] as Int
@@ -64,33 +88,35 @@ class MainActivityViewModel(startingTemp: Int) : ViewModel() {
         }
     }
 
-    internal fun getCycle(application: Application) {
-        SocketManager.getInstance(application).addEvent(Constants.SOCKET_CYCLE) {
+    internal fun getCycle() {
+        manager.addEvent(Constants.SOCKET_CYCLE) {
             CoroutineScope(Dispatchers.Main).launch {
-                cycle.value = it[0] as Boolean
+                cycle.value = it[0] == "True"
             }
         }
     }
 
-    internal fun getDoor(application: Application) {
-        SocketManager.getInstance(application).addEvent(Constants.SOCKET_DOOR) {
+    internal fun getDoor() {
+        manager.addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
-                door.value = it[0] as Boolean
+                val array = it[0].toString().split(",").map { it == "True" }.toList()
+                door.value = array[0]
+                secondDoor.value = array[1]
             }
         }
     }
 
-    internal fun setCycle(application: Application) {
-        SocketManager.getInstance(application).emit(Constants.SOCKET_CYCLE_CHANGE, cycle)
+    internal fun setCycle() {
+        manager.emit(Constants.SOCKET_CYCLE_CHANGE, cycle.value!!.not())
         cycle.value = cycle.value?.not()
     }
 
-    internal fun setDoor(application: Application) {
-        SocketManager.getInstance(application).emit(Constants.SOCKET_DOOR_CHANGE, "1, $door")
+    internal fun setDoor() {
+        manager.emit(Constants.SOCKET_DOOR_CHANGE, "1, ${door.value?.not()}")
         door.value = door.value?.not()
     }
 
-    internal fun getWeather(context: Context) {
+    internal fun getWeather() {
         CoroutineScope(Dispatchers.IO).launch {
             //retrofit
             weatherService.getWeather()
@@ -104,7 +130,8 @@ class MainActivityViewModel(startingTemp: Int) : ViewModel() {
                     }
 
                     override fun onFailure(call: Call<WeatherData>, t: Throwable) {
-                        Toast.makeText(context, "날씨 정보를 받아오지 못하였습니다.", Toast.LENGTH_SHORT).show()
+                        _toasts.value = Event("날씨 정보를 받아오지 못하였습니다.");
+                    //Toast.makeText(context, "날씨 정보를 받아오지 못하였습니다.", Toast.LENGTH_SHORT).show()
                     }
                 })
         }
