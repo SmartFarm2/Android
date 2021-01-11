@@ -23,7 +23,7 @@ import retrofit2.Retrofit
 
 class MainActivityViewModel(startingTemp: Int, application: Application) : ViewModel() {
 
-    lateinit var manager : SocketManager
+    var manager : SocketManager
 
     private var temp = MutableLiveData<Int>()
     val tempData: LiveData<Int>
@@ -79,7 +79,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         manager.removeEvent(Constants.SOCKET_CYCLE)
         manager.removeEvent(Constants.SOCKET_TEMP)
     }
-    internal fun getTemp() {
+    private fun getTemp() {
         manager.addEvent(Constants.SOCKET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
                 temp.value = it[0] as Int
@@ -88,7 +88,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         }
     }
 
-    internal fun getCycle() {
+    private fun getCycle() {
         manager.addEvent(Constants.SOCKET_CYCLE) {
             CoroutineScope(Dispatchers.Main).launch {
                 cycle.value = it[0] == "True"
@@ -96,7 +96,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         }
     }
 
-    internal fun getDoor() {
+    private fun getDoor() {
         manager.addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
                 val array = it[0].toString().split(",").map { it == "True" }.toList()

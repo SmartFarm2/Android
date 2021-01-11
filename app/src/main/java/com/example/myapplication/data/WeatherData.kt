@@ -1,11 +1,11 @@
 package com.example.myapplication.data
 
 data class WeatherData(
-    val rainPercent: String,
+    val rainPercent: Int,
     val weather:String,
-    val humi: String,
+    val humi: Int,
     val sky: String,
-    val temp: String,
-    val windspeedew: String,
-    val winddeg: String
+    val temp: Int,
+    val windspeedew: Double,
+    val winddeg: Int
 )
