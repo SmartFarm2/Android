@@ -4,7 +4,7 @@
     <data>
         <variable
             name="special"
-            type="com.example.myapplication.data.SpecialData" />
+            type="com.smartfarm.myapplication.data.SpecialData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

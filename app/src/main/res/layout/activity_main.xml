@@ -7,19 +7,19 @@
 
         <variable
             name="farmInfo"
-            type="com.example.myapplication.data.FarmData" />
+            type="com.smartfarm.myapplication.data.FarmData" />
 
         <variable
             name="items"
-            type="com.example.myapplication.data.SpecialList" />
+            type="com.smartfarm.myapplication.data.SpecialList" />
 
         <variable
             name="info"
-            type="com.example.myapplication.data.FarmInfoData" />
+            type="com.smartfarm.myapplication.data.FarmInfoData" />
 
         <variable
             name="myViewModel"
-            type="com.example.myapplication.viewmodel.MainActivityViewModel" />
+            type="com.smartfarm.myapplication.viewmodel.MainActivityViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

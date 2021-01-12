@@ -3,11 +3,11 @@
     <data>
         <variable
             name="info"
-            type="com.example.myapplication.data.FarmInfoData" />
+            type="com.smartfarm.myapplication.data.FarmInfoData" />
 
         <variable
             name="myViewModel"
-            type="com.example.myapplication.viewmodel.MainActivityViewModel" />
+            type="com.smartfarm.myapplication.viewmodel.MainActivityViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
