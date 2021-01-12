@@ -48,11 +48,16 @@ class QrScanActivity : AppCompatActivity() {
             isFlashEnabled = false
 
             decodeCallback = DecodeCallback {
-                //서버주소 변경
-                MyApp.pref.serverAddress = it.text
-                startActivity(Intent(this@QrScanActivity, MainActivity::class.java))
+                val exp = Regex("(http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}:([0-9]+){3,4})")
+                if(exp.matches(it.text)){
+                    MyApp.pref.serverAddress = it.text
+                    startActivity(Intent(this@QrScanActivity, MainActivity::class.java))
 
-                finish()
+                    finish()
+                }else{
+                    Toast.makeText(this@QrScanActivity, "올바른 QR을 인식시켜 주세요.", Toast.LENGTH_SHORT).show()
+                }
+
             }
 
             errorCallback = ErrorCallback {
