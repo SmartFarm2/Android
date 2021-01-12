@@ -19,10 +19,10 @@ class SignActivity : AppCompatActivity() {
 
         nextButton.setOnClickListener {
             when {
-//                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) /*and (MyApp.pref.serverAddress != "")*/ -> {
-//                    startActivity(Intent(this, MainActivity::class.java))
-//                    finish()
-//                }
+                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) /*and (MyApp.pref.serverAddress != "")*/ -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
                 setPassword.text.isNotEmpty() and (setPassword.text.length > 3) /*and (MyApp.pref.serverAddress == "")*/ -> {
                     startActivity(Intent(this, QrActivity::class.java))
                     finish()

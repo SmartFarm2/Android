@@ -1,11 +1,13 @@
 package com.smartfarm.myapplication.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.smartfarm.myapplication.R
+import com.smartfarm.myapplication.adapter.SpecialAdapter
 import com.smartfarm.myapplication.data.*
 import com.smartfarm.myapplication.databinding.ActivityMainBinding
 import com.smartfarm.myapplication.viewmodel.MainActivityViewModel

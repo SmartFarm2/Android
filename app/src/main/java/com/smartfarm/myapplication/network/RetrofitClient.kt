@@ -1,6 +1,7 @@
 package com.smartfarm.myapplication.network
 
 import android.util.Log
+import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.data.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,7 +25,7 @@ object RetrofitClient {
                 .build()
 
             instance = Retrofit.Builder()
-                .baseUrl(Constants.SERVER_ADDRESS)
+                .baseUrl(MyApp.pref.serverAddress)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

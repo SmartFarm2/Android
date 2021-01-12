@@ -15,6 +15,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.smartfarm.myapplication.R
+import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.databinding.ActivityQrScanBinding
 import kotlinx.android.synthetic.main.activity_qr_scan.*
 
@@ -48,7 +49,7 @@ class QrScanActivity : AppCompatActivity() {
 
             decodeCallback = DecodeCallback {
                 //서버주소 변경
-//                MyApp.pref.serverAddress = it.text
+                MyApp.pref.serverAddress = it.text
                 startActivity(Intent(this@QrScanActivity, MainActivity::class.java))
 
                 finish()
