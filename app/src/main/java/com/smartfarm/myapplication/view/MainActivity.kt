@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.adapter.SpecialAdapter
 import com.smartfarm.myapplication.data.*

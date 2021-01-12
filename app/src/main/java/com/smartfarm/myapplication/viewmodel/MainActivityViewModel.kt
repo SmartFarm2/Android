@@ -122,7 +122,11 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
                         call: Call<WeatherData>,
                         response: Response<WeatherData>
                     ) {
-                        weather.value = response.body()?.weather
+                        if(response.code() == 200) {
+                            weather.value = response.body()?.weather
+                        }else {
+                            weather.value = "정보 없음"
+                        }
                         Log.d("weather", "data: ${response.body()}")
                     }
 
