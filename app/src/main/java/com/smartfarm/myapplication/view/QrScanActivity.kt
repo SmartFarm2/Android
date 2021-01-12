@@ -25,7 +25,7 @@ class QrScanActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQrScanBinding
 
-    private lateinit var codeScanner : CodeScanner
+    private lateinit var codeScanner: CodeScanner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +48,18 @@ class QrScanActivity : AppCompatActivity() {
             isFlashEnabled = false
 
             decodeCallback = DecodeCallback {
-                val exp = Regex("http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}:([0-9]+){3,4}")
-                if(exp.matches(it.text)){
+                val exp =
+                    Regex("http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}:([0-9]+){3,4}")
+                if (exp.matches(it.text)) {
                     MyApp.pref.serverAddress = it.text
                     startActivity(Intent(this@QrScanActivity, MainActivity::class.java))
 
                     finish()
-                }else{
-                    Toast.makeText(this@QrScanActivity, "올바른 QR을 인식시켜 주세요.", Toast.LENGTH_SHORT).show()
+                } else {
+                    runOnUiThread {
+                        Toast.makeText(this@QrScanActivity, "올바른 QR을 인식시켜 주세요.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
 
             }
@@ -73,16 +77,22 @@ class QrScanActivity : AppCompatActivity() {
     }
 
     private fun setupPermissions() {
-        val permission = ContextCompat.checkSelfPermission(this,
-            android.Manifest.permission.CAMERA)
+        val permission = ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.CAMERA
+        )
 
-        if(permission != PackageManager.PERMISSION_GRANTED){
+        if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest()
         }
     }
 
-    private fun makeRequest(){
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+    private fun makeRequest() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.CAMERA),
+            CAMERA_REQUEST_CODE
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -94,8 +104,7 @@ class QrScanActivity : AppCompatActivity() {
             CAMERA_REQUEST_CODE -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "카메라 권한을 허용해 주십시오.", Toast.LENGTH_SHORT).show()
-                }
-                else{
+                } else {
                     //성공
                 }
             }
