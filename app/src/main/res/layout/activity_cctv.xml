@@ -106,14 +106,14 @@
                     android:id="@+id/cycle"
                     name="@{`환기팬`}"
                     img="@{@drawable/ic_fan}"
-                    isOn="@{info.fan}"
+                    isOn="@{myViewModel.cycleData}"
                     layout="@layout/layout_mini_information" />
 
                 <include
                     android:id="@+id/door"
                     name="@{`개폐기`}"
                     img="@{@drawable/ic_door}"
-                    isOn="@{info.door}"
+                    isOn="@{myViewModel.doorData}"
                     layout="@layout/layout_mini_information" />
 
             </LinearLayout>

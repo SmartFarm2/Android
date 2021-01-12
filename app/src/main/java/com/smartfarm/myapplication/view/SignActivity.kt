@@ -19,19 +19,8 @@ class SignActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
 
         nextButton.setOnClickListener {
-            when {
-                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) and (MyApp.pref.serverAddress != "DEFAULT_ADDRESS") -> {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
-                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) and (MyApp.pref.serverAddress == "DEFAULT_ADDRESS") -> {
-                    startActivity(Intent(this, QrActivity::class.java))
-                    finish()
-                }
-                else -> {
-                    Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
-                }
-            }
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 }

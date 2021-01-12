@@ -39,10 +39,6 @@ class CCTVActivityViewModel(startingTemp: Int, application: Application) : ViewM
     get() = _toasts
 
     init {
-        cycle.value = true
-        door.value = true
-        secondDoor.value = true
-
         manager = SocketManager.getInstance(application)
     }
 

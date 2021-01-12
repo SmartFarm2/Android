@@ -49,7 +49,6 @@ class CCTVActivity : AppCompatActivity() {
         viewModelFactory = CCTVActivityViewModelFactory(20, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(CCTVActivityViewModel::class.java)
 
-
         with(binding) {
             myViewModel = viewModel
             lifecycleOwner = this@CCTVActivity
@@ -61,6 +60,10 @@ class CCTVActivity : AppCompatActivity() {
             door.infoBox.setOnClickListener {
                 viewModel.setDoor()
             }
+        }
+
+        with(viewModel){
+            observing()
         }
 
         playerView = playerV
@@ -90,5 +93,10 @@ class CCTVActivity : AppCompatActivity() {
             player!!.release()
             player = null
         }
+    }
+
+    override fun onDestroy() {
+        viewModel.deobserving()
+        super.onDestroy()
     }
 }
