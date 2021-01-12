@@ -19,9 +19,9 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity android:name="com.smartfarm.myapplication.view.QrScanActivity" />
-        <activity android:name="com.smartfarm.myapplication.view.QrActivity" />
+        <activity android:name="com.smartfarm.myapplication.view.SignActivity" />
         <activity
-            android:name="com.smartfarm.myapplication.view.SignActivity"
+            android:name="com.smartfarm.myapplication.view.QrActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
