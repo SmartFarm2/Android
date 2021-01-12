@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
+import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.databinding.ActivitySignupBinding
 import kotlinx.android.synthetic.main.activity_signup.*
 
@@ -19,11 +20,11 @@ class SignActivity : AppCompatActivity() {
 
         nextButton.setOnClickListener {
             when {
-                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) /*and (MyApp.pref.serverAddress != "")*/ -> {
+                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) and (MyApp.pref.serverAddress != "DEFAULT_ADDRESS") -> {
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
-                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) /*and (MyApp.pref.serverAddress == "")*/ -> {
+                setPassword.text.isNotEmpty() and (setPassword.text.length > 3) and (MyApp.pref.serverAddress == "DEFAULT_ADDRESS") -> {
                     startActivity(Intent(this, QrActivity::class.java))
                     finish()
                 }
