@@ -52,12 +52,8 @@ class QrScanActivity : AppCompatActivity() {
                     "http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}:([0-9]+){3,4}".toRegex()
                 if (exp.matches(it.text)) {
                     MyApp.pref.serverAddress = it.text
-<<<<<<< Updated upstream
-                    startActivity(Intent(this@QrScanActivity, SignActivity::class.java))
-=======
                     startActivity(Intent(this@QrScanActivity, SetPlantTemp::class.java))
 
->>>>>>> Stashed changes
                     finish()
                 } else {
                     runOnUiThread {
