@@ -12,6 +12,8 @@ object Constants {
     const val SOCKET_TEMP = "temp"
     const val SOCKET_HUMI = "humi"
     const val SOCKET_CYCLE = "cycle"
+    const val SOCKET_SET_TEMP = "setTemp"
+    const val SOCKET_SET_TEMP_STATUS = "setTempEvent"
     const val SOCKET_CYCLE_CHANGE = "changeCycle"
     const val SOCKET_DOOR = "door"
     const val SOCKET_DOOR_CHANGE = "changeDoor"

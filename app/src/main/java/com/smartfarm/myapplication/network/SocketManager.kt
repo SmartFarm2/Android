@@ -1,10 +1,9 @@
-package com.smartfarm.myapplication
+package com.smartfarm.myapplication.network
 
 import android.app.Application
 import android.util.Log
 import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.data.Constants
-import com.smartfarm.myapplication.network.SocketService
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.engineio.client.transports.WebSocket
@@ -83,7 +82,7 @@ class SocketManager(application : Application) {
         fun getInstance(application : Application): SocketManager =
                 instance ?: synchronized(this) {
                     instance ?: SocketManager(application).also {
-                        this.application = application
+                        Companion.application = application
                         instance = it
                     }
                 }

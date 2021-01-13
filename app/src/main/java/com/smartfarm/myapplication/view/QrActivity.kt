@@ -18,7 +18,7 @@ class QrActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qr)
         if(MyApp.pref.serverAddress != Constants.SERVER_ADDRESS) {
-            startActivity(Intent(this, SignActivity::class.java))
+            startActivity(Intent(this, SetPlantTemp::class.java))
             finish()
         }
         qr_scan_btn.setOnClickListener {

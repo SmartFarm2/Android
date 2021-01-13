@@ -13,7 +13,6 @@ import com.smartfarm.myapplication.view.MainActivity
 import com.smartfarm.myapplication.data.Constants
 import com.smartfarm.myapplication.data.Constants.channelID
 import com.smartfarm.myapplication.data.Constants.notificationId
-import com.smartfarm.myapplication.SocketManager
 import com.smartfarm.myapplication.data.Messages
 
 

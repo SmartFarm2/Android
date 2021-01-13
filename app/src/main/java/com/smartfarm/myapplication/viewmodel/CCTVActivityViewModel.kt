@@ -1,22 +1,14 @@
 package com.smartfarm.myapplication.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.smartfarm.myapplication.SocketManager
+import com.smartfarm.myapplication.network.SocketManager
 import com.smartfarm.myapplication.data.Constants
-import com.smartfarm.myapplication.data.WeatherData
-import com.smartfarm.myapplication.network.RetrofitClient
-import com.smartfarm.myapplication.network.RetrofitService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
 
 class CCTVActivityViewModel(startingTemp: Int, application: Application) : ViewModel() {
 

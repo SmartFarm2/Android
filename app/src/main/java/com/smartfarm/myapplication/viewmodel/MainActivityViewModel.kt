@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.smartfarm.myapplication.SocketManager
+import com.smartfarm.myapplication.network.SocketManager
 import com.smartfarm.myapplication.data.Constants
 import com.smartfarm.myapplication.data.WeatherData
 import com.smartfarm.myapplication.network.RetrofitClient

@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
-import com.smartfarm.myapplication.SocketManager
+import com.smartfarm.myapplication.network.SocketManager
 import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.databinding.ActivitySignupBinding
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.net.Socket
 
 class SignActivity : AppCompatActivity() {
 
@@ -23,7 +22,7 @@ class SignActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         manager = SocketManager.getInstance(application)
-        manager.addEvent("password") {
+        manager.addEvent("correct password") {
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == true) {
                     startActivity(Intent(this@SignActivity, MainActivity::class.java))
