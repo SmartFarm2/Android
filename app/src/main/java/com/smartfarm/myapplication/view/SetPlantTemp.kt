@@ -23,22 +23,20 @@ class SetPlantTemp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if(MyApp.pref.openerSetting != "") {
+            startActivity(Intent(this@SetPlantTemp, SignActivity::class.java))
+            finish()
+        }
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_plant_temp)
 
         viewModelFactory = SetPlantViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SetPlantTempViewModel::class.java)
 
-        if(MyApp.pref.openerSetting != "") {
-            startActivity(Intent(this@SetPlantTemp, SignActivity::class.java))
-        }
 
         with(binding){
             lifecycleOwner = this@SetPlantTemp
             myViewModel = viewModel
-
-            setPlantTempNext.setOnClickListener {
-               viewModel.setTemp()
-            }
         }
 
         with(viewModel) {
@@ -49,6 +47,7 @@ class SetPlantTemp : AppCompatActivity() {
                     Toast.makeText(this@SetPlantTemp, "값설정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     MyApp.pref.openerSetting = plantTemp.value.toString()
                     startActivity(Intent(this@SetPlantTemp, SignActivity::class.java))
+                    finish()
                 }else{
                     Toast.makeText(this@SetPlantTemp, "관리자에게 문의하시오..", Toast.LENGTH_SHORT).show()
                 }

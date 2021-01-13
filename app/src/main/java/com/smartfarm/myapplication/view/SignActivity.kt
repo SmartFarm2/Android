@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.network.SocketManager
 import com.smartfarm.myapplication.application.MyApp
+import com.smartfarm.myapplication.data.Constants
 import com.smartfarm.myapplication.databinding.ActivitySignupBinding
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +23,7 @@ class SignActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         manager = SocketManager.getInstance(application)
-        manager.addEvent("correct password") {
+        manager.addEvent(Constants.SOCKET_PASSWORD) {
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == true) {
                     startActivity(Intent(this@SignActivity, MainActivity::class.java))
@@ -33,13 +34,13 @@ class SignActivity : AppCompatActivity() {
             }
         }
         if(MyApp.pref.password != "") {
-            manager.emit("password", MyApp.pref.password)
+            manager.emit(Constants.SOCKET_PASSWORD, MyApp.pref.password)
         }
         nextButton.setOnClickListener {
             when {
                 setPassword.text.isNotEmpty() and (setPassword.text.length > 3) and (MyApp.pref.serverAddress != "DEFAULT_ADDRESS") -> {
                     MyApp.pref.password = setPassword.text.toString()
-                    manager.emit("password", setPassword.text.toString())
+                    manager.emit(Constants.SOCKET_PASSWORD, setPassword.text.toString())
                 }
                 else -> {
                     Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -49,7 +50,7 @@ class SignActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        manager.removeEvent("password")
+        manager.removeEvent(Constants.SOCKET_PASSWORD)
         super.onDestroy()
     }
 }

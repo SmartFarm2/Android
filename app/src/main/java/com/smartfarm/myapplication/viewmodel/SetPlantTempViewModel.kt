@@ -31,18 +31,18 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     }
 
     fun deobserving() {
-        manager.removeEvent(Constants.SOCKET_SET_TEMP_STATUS)
+        manager.removeEvent(Constants.SOCKET_SET_TEMP)
     }
 
     private fun getSetTempState(){
-        manager.addEvent(Constants.SOCKET_SET_TEMP_STATUS) {
+        manager.addEvent(Constants.SOCKET_SET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
                 status.value = it[0] as Boolean
             }
         }
     }
 
-    internal fun setTemp(){
+    fun setTemp(){
         if(plantTemp.value.isNullOrBlank()) {
             _toasts.value = Event("온도값을 설정해 주십시오.")
         }
