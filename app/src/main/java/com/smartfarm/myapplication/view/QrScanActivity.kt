@@ -49,11 +49,10 @@ class QrScanActivity : AppCompatActivity() {
 
             decodeCallback = DecodeCallback {
                 val exp =
-                    Regex("http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}:([0-9]+){3,4}")
+                    "http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}:([0-9]+){3,4}".toRegex()
                 if (exp.matches(it.text)) {
                     MyApp.pref.serverAddress = it.text
                     startActivity(Intent(this@QrScanActivity, SignActivity::class.java))
-
                     finish()
                 } else {
                     runOnUiThread {

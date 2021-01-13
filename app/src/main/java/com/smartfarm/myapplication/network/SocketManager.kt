@@ -12,7 +12,7 @@ import io.socket.engineio.client.transports.WebSocket
 
 class SocketManager(application : Application) {
 
-    private val LOG_KEY = "SOCKET_MANAGER"
+    private val logKey = "SOCKET_MANAGER"
 
     var mSocket: Socket
     private val events = HashMap<String, ArrayList<(Array<Any>) -> Unit>>()
@@ -25,15 +25,17 @@ class SocketManager(application : Application) {
         SocketService.makeNotification(application.applicationContext, Constants.CONNECTING_KEY)
         addEvent(Socket.EVENT_CONNECT_ERROR) {
             it.forEach { error ->
-                Log.e(LOG_KEY, error.toString())
+                Log.e(logKey, error.toString())
             }
+
+            SocketService.makeNotification(application.applicationContext, Constants.DISCONNECTED_KEY)
         }
         addEvent(Socket.EVENT_CONNECT) {
-            Log.i(LOG_KEY, "Socket connected!")
+            Log.i(logKey, "Socket connected!")
             SocketService.makeNotification(application.applicationContext, Constants.CONNECTED_KEY)
         }
         addEvent(Socket.EVENT_DISCONNECT) {
-            Log.i(LOG_KEY, "Socket disconnected")
+            Log.i(logKey, "Socket disconnected")
             SocketService.makeNotification(application.applicationContext, Constants.DISCONNECTED_KEY)
         }
 
@@ -70,7 +72,7 @@ class SocketManager(application : Application) {
                 mSocket.on(it, event)
             }
         }
-        Log.i(LOG_KEY, "Refresh Finish")
+        Log.i(logKey, "Refresh Finish")
     }
 
     companion object {
