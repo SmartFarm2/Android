@@ -10,6 +10,7 @@ object Constants {
     const val SERVER_DATA_KEY = "SERVER_ADDRESS_KEY"
     const val SERVER_ADDRESS = "DEFAULT_ADDRESS"
     const val SOCKET_TEMP = "temp"
+    const val SOCKET_HUMI = "humi"
     const val SOCKET_CYCLE = "cycle"
     const val SOCKET_CYCLE_CHANGE = "changeCycle"
     const val SOCKET_DOOR = "door"

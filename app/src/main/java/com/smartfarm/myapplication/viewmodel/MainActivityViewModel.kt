@@ -68,6 +68,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
 
     fun observing() {
         getTemp()
+        getHumi()
         getCycle()
         getDoor()
     }
@@ -80,6 +81,13 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         manager.addEvent(Constants.SOCKET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
                 temp.value = it[0] as Int
+            }
+        }
+    }
+
+    private fun getHumi(){
+        manager.addEvent(Constants.SOCKET_HUMI){
+            CoroutineScope(Dispatchers.Main).launch {
                 hum.value = it[0] as Int
             }
         }
