@@ -34,7 +34,7 @@
                 layout="@layout/layout_information"
                 app:endPoint="@{`℃`}"
                 app:img="@{@drawable/ic_temp_cold_line}"
-                app:name="@{`온도`}"
+                app:name="@{`농장 온도`}"
                 app:value="@{myViewModel.tempData}" />
 
             <View
