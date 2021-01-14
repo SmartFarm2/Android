@@ -10,6 +10,7 @@ object Constants {
     const val SERVER_DATA_KEY = "SERVER_ADDRESS_KEY"
     const val PASSWORD_DATA_KEY = "PASSWORD_KEY"
     const val OPENER_DATA_KEY = "OPENER_EKY"
+    const val NAME_DATA_KEY = "name"
 
     const val SERVER_ADDRESS = "DEFAULT_ADDRESS"
     const val SOCKET_TEMP = "temp"
@@ -28,4 +29,5 @@ object Constants {
 
     const val WEATHER_URL = "/weather"
 
+    const val NAME_VERIFY_KEY = "SUCCESS"
 }

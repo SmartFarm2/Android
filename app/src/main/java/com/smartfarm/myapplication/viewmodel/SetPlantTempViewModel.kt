@@ -22,8 +22,8 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     val toasts : LiveData<Event<String>>
         get() = _toasts
 
-    private var status = MutableLiveData<Boolean>()
-    val statusData : LiveData<Boolean>
+    private var status = MutableLiveData<String>()
+    val statusData : LiveData<String>
         get() = status
 
     fun observing() {
@@ -37,7 +37,7 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     private fun getSetTempState(){
         manager.addEvent(Constants.SOCKET_SET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
-                status.value = it[0] as Boolean
+                status.value = it[0] as String
             }
         }
     }
