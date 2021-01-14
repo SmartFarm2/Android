@@ -13,7 +13,6 @@ import com.smartfarm.myapplication.databinding.ActivitySetPlantTempBinding
 import com.smartfarm.myapplication.viewmodel.SetPlantTempViewModel
 import com.smartfarm.myapplication.viewmodel.SetPlantViewModelFactory
 
-
 class SetPlantTemp : AppCompatActivity() {
 
     private lateinit var binding : ActivitySetPlantTempBinding

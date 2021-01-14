@@ -1,6 +1,5 @@
 package com.smartfarm.myapplication.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.net.toUri
@@ -16,12 +15,8 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import com.google.common.net.HttpHeaders
-import com.smartfarm.myapplication.adapter.SpecialAdapter
 import com.smartfarm.myapplication.viewmodel.CCTVActivityViewModel
 import com.smartfarm.myapplication.viewmodel.CCTVActivityViewModelFactory
-import com.smartfarm.myapplication.viewmodel.MainActivityViewModel
-import com.smartfarm.myapplication.viewmodel.MainActivityViewModelFactory
-import kotlinx.android.synthetic.main.activity_cctv.*
 
 class CCTVActivity : AppCompatActivity() {
 
@@ -60,13 +55,13 @@ class CCTVActivity : AppCompatActivity() {
             door.infoBox.setOnClickListener {
                 viewModel.setDoor()
             }
+
+            playerView = playerV
         }
 
         with(viewModel){
             observing()
         }
-
-        playerView = playerV
     }
 
     private fun initializePlayer() {

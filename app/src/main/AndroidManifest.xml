@@ -18,18 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.SetNameActivity"></activity>
+        <activity android:name=".view.SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.SetNameActivity" />
         <activity android:name=".view.SetPlantTemp" />
         <activity android:name=".view.QrScanActivity" />
         <activity android:name=".view.SignActivity" />
         <activity
             android:name=".view.QrActivity"
             android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.CCTVActivity" />
 

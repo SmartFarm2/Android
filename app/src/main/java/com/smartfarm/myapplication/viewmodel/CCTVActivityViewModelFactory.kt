@@ -9,7 +9,7 @@ class CCTVActivityViewModelFactory(private val startingTotal: Int, private val a
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CCTVActivityViewModel::class.java)){
-            return CCTVActivityViewModel(startingTotal, application) as T
+            return CCTVActivityViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown View Model Class")
     }

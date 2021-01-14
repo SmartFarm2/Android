@@ -10,9 +10,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CCTVActivityViewModel(startingTemp: Int, application: Application) : ViewModel() {
+class CCTVActivityViewModel(application: Application) : ViewModel() {
 
-    var manager : SocketManager
+    private var manager : SocketManager = SocketManager.getInstance(application)
 
     private var cycle = MutableLiveData<Boolean>()
     val cycleData: LiveData<Boolean>
@@ -29,10 +29,6 @@ class CCTVActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private var _toasts = MutableLiveData<Event<String>>()
     val toasts : LiveData<Event<String>>
     get() = _toasts
-
-    init {
-        manager = SocketManager.getInstance(application)
-    }
 
     fun observing() {
         getCycle()

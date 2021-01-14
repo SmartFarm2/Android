@@ -17,7 +17,6 @@ import com.budiyev.android.codescanner.ScanMode
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.databinding.ActivityQrScanBinding
-import kotlinx.android.synthetic.main.activity_qr_scan.*
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -71,8 +70,8 @@ class QrScanActivity : AppCompatActivity() {
             }
         }
 
-        scan.setOnClickListener {
-            codeScanner.startPreview()
+        binding.scan.setOnClickListener {
+           codeScanner.startPreview()
         }
     }
 
