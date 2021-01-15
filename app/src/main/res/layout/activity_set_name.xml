@@ -64,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button_background"
-            android:text="@string/recognize"
+            android:text="@string/next"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
