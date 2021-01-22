@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.application.MyApp
+import com.smartfarm.myapplication.data.Constants
 import com.smartfarm.myapplication.databinding.ActivitySetDoorBinding
 import com.smartfarm.myapplication.network.SocketManager
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +28,7 @@ class SetDoorActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_door)
         manager = SocketManager.getInstance(application)
 
-        manager.addEvent("setAuto"){
+        manager.addEvent(Constants.AUTO){
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == check) {
                     Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
@@ -57,7 +58,7 @@ class SetDoorActivity : AppCompatActivity() {
                 if(check == null) {
                     Toast.makeText(this@SetDoorActivity, "자동과 수동중 선택해주세요.", Toast.LENGTH_SHORT).show()
                 }else {
-                    manager.emit("setAuto", check!!)
+                    manager.emit(Constants.AUTO, check!!)
                 }
             }
         }
