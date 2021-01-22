@@ -1,5 +1,6 @@
 package com.smartfarm.myapplication.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -42,8 +43,29 @@ class NotiBoxAdapter : RecyclerView.Adapter<NotiBoxAdapter.NotiBoxViewHolder>() 
         RecyclerView.ViewHolder(binding.root){
         fun bind(notiDataBase: NotiDataBase){
             binding.content.text = notiDataBase.message
-            binding.time.text = ((((Calendar.getInstance().timeInMillis - notiDataBase.time).toInt()) / 1000).toString()) + "초전"
+            binding.time.text = getDate((((Calendar.getInstance().timeInMillis - notiDataBase.time) / 1000)))
             binding.title.text = notiDataBase.title
+        }
+
+        private fun getDate(currentTime : Long) : String{
+
+            Log.d("TAG", currentTime.toString())
+            var date : String
+
+            if(currentTime < 60) {
+                date = "방금전"
+            }
+            else if(currentTime / 60 < 60) {
+                date = (currentTime / 60).toString() + "분전"
+            }
+            else if(currentTime / 3600 < 24) {
+                date = (currentTime / 3600).toString() + "시간전"
+            }
+            else {
+                date = (currentTime / 86400).toString() + "일전"
+            }
+
+            return date
         }
     }
 }
