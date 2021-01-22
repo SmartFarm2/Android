@@ -2,6 +2,7 @@ package com.smartfarm.myapplication.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,14 +11,20 @@ import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.adapter.SpecialAdapter
 import com.smartfarm.myapplication.data.*
 import com.smartfarm.myapplication.databinding.ActivityMainBinding
+import com.smartfarm.myapplication.network.SocketManager
 import com.smartfarm.myapplication.viewmodel.MainActivityViewModel
 import com.smartfarm.myapplication.viewmodel.MainActivityViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var viewModelFactory: MainActivityViewModelFactory
+    private lateinit var manager: SocketManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -31,7 +31,7 @@ class SetPlantTemp : AppCompatActivity() {
 
         viewModelFactory = SetPlantViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SetPlantTempViewModel::class.java)
-
+//현재값 유지 할지
 
         with(binding){
             lifecycleOwner = this@SetPlantTemp
