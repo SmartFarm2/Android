@@ -21,10 +21,6 @@ class SetNameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(MyApp.pref.name != "") {
-            startActivity(Intent(this@SetNameActivity, SignActivity::class.java))
-            finish()
-        }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_name)
         viewModel = ViewModelProvider(this).get(SetNameViewModel::class.java)

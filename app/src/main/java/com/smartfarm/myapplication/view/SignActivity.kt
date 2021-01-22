@@ -27,8 +27,13 @@ class SignActivity : AppCompatActivity() {
         manager.addEvent(Constants.SOCKET_PASSWORD) {
             CoroutineScope(Dispatchers.Main).launch {
                 if (it[0] == true) {
-                    startActivity(Intent(this@SignActivity, MainActivity::class.java))
-                    finish()
+                    if(MyApp.pref.name == "") {
+                        startActivity(Intent(this@SignActivity, SetPlantTemp::class.java))
+                        finish()
+                    }else {
+                        startActivity(Intent(this@SignActivity, MainActivity::class.java))
+                        finish()
+                    }
                 } else {
                     Toast.makeText(this@SignActivity, "비밀번호를 확인하세요", Toast.LENGTH_SHORT).show()
                 }

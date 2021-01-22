@@ -51,7 +51,7 @@ class QrScanActivity : AppCompatActivity() {
                     "http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}".toRegex()
                 if (exp.matches(it.text)) {
                     MyApp.pref.serverAddress = it.text
-                    startActivity(Intent(this@QrScanActivity, SetPlantTemp::class.java))
+                    startActivity(Intent(this@QrScanActivity, SignActivity::class.java))
 
                     finish()
                 } else {
