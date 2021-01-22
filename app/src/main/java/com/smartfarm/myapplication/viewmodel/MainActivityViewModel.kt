@@ -17,18 +17,27 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import kotlin.math.log
 
 class MainActivityViewModel(startingTemp: Int, application: Application) : ViewModel() {
 
-    var manager : SocketManager
+    var manager: SocketManager
 
     private var temp = MutableLiveData<Int>()
     val tempData: LiveData<Int>
         get() = temp
 
+    private var insideTemp = MutableLiveData<Int>()
+    val insideTempData: LiveData<Int>
+        get() = insideTemp
+
     private var hum = MutableLiveData<Int>()
     val humData: LiveData<Int>
         get() = hum
+
+    private var insideHum = MutableLiveData<Int>()
+    val insideHumData: LiveData<Int>
+        get() = insideHum
 
     private var cycle = MutableLiveData<Boolean>()
     val cycleData: LiveData<Boolean>
@@ -38,17 +47,13 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val doorData: LiveData<Boolean>
         get() = door
 
-    private var secondDoor = MutableLiveData<Boolean>()
-    val secondDoorData: LiveData<Boolean>
-        get() = secondDoor
-
     private var weather = MutableLiveData<String>()
     val weatherData: LiveData<String>
         get() = weather
 
     private var _toasts = MutableLiveData<Event<String>>()
-    val toasts : LiveData<Event<String>>
-    get() = _toasts
+    val toasts: LiveData<Event<String>>
+        get() = _toasts
 
     private val retrofit: Retrofit = RetrofitClient.getInstance()
     private var weatherService: RetrofitService
@@ -61,7 +66,6 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         cycle.value = true
         door.value = true
         weather.value = "맑음"
-        secondDoor.value = true
 
         manager = SocketManager.getInstance(application)
     }
@@ -71,12 +75,19 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         getHumi()
         getCycle()
         getDoor()
+        getInsideTemp()
+        getInsideHumi()
     }
+
     fun deobserving() {
         manager.removeEvent(Constants.SOCKET_DOOR)
         manager.removeEvent(Constants.SOCKET_CYCLE)
         manager.removeEvent(Constants.SOCKET_TEMP)
+        manager.removeEvent(Constants.SOCKET_HUMI)
+        manager.removeEvent(Constants.SOCKET_TEMP_INSIDE)
+        manager.removeEvent(Constants.SOCKET_HUMI_INSIDE)
     }
+
     private fun getTemp() {
         manager.addEvent(Constants.SOCKET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
@@ -85,10 +96,26 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         }
     }
 
-    private fun getHumi(){
-        manager.addEvent(Constants.SOCKET_HUMI){
+    private fun getHumi() {
+        manager.addEvent(Constants.SOCKET_HUMI) {
             CoroutineScope(Dispatchers.Main).launch {
                 hum.value = it[0] as Int
+            }
+        }
+    }
+
+    private fun getInsideTemp() {
+        manager.addEvent(Constants.SOCKET_TEMP_INSIDE) {
+            CoroutineScope(Dispatchers.Main).launch {
+                insideTemp.value = it[0] as Int
+            }
+        }
+    }
+
+    private fun getInsideHumi() {
+        manager.addEvent(Constants.SOCKET_HUMI_INSIDE) {
+            CoroutineScope(Dispatchers.Main).launch {
+                insideHum.value = it[0] as Int
             }
         }
     }
@@ -104,9 +131,8 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private fun getDoor() {
         manager.addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
-                val array = it[0].toString().split(",").map { it == "True" }.toList()
-                door.value = array[0]
-                secondDoor.value = array[1]
+                door.value = it[0] as Boolean
+                Log.d("door", "data: ${door.value}")
             }
         }
     }
@@ -117,8 +143,11 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     }
 
     internal fun setDoor() {
-        manager.emit(Constants.SOCKET_DOOR_CHANGE, "1, ${door.value?.not()}")
-        door.value = door.value?.not()
+        if(door.value == false){
+            manager.emit(Constants.SOCKET_DOOR, false)
+        }else if (door.value == true){
+            manager.emit(Constants.SOCKET_DOOR, true)
+        }
     }
 
     internal fun getWeather() {
@@ -130,9 +159,9 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
                         call: Call<WeatherData>,
                         response: Response<WeatherData>
                     ) {
-                        if(response.code() == 200) {
+                        if (response.code() == 200) {
                             weather.value = response.body()?.weather
-                        }else {
+                        } else {
                             weather.value = "정보 없음"
                         }
                         Log.d("weather", "data: ${response.body()}")
@@ -140,7 +169,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
 
                     override fun onFailure(call: Call<WeatherData>, t: Throwable) {
                         _toasts.value = Event("날씨 정보를 받아오지 못하였습니다.");
-                    //Toast.makeText(context, "날씨 정보를 받아오지 못하였습니다.", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(context, "날씨 정보를 받아오지 못하였습니다.", Toast.LENGTH_SHORT).show()
                     }
                 })
         }

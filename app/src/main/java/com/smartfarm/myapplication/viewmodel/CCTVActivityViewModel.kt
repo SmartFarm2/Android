@@ -34,6 +34,7 @@ class CCTVActivityViewModel(application: Application) : ViewModel() {
         getCycle()
         getDoor()
     }
+
     fun deobserving() {
         manager.removeEvent(Constants.SOCKET_DOOR)
         manager.removeEvent(Constants.SOCKET_CYCLE)
@@ -63,7 +64,10 @@ class CCTVActivityViewModel(application: Application) : ViewModel() {
     }
 
     internal fun setDoor() {
-        manager.emit(Constants.SOCKET_DOOR_CHANGE, "1, ${door.value?.not()}")
-        door.value = door.value?.not()
+        if(door.value == true){
+            manager.emit(Constants.SOCKET_DOOR, "off")
+        }else if (door.value == false){
+            manager.emit(Constants.SOCKET_DOOR, "on")
+        }
     }
 }

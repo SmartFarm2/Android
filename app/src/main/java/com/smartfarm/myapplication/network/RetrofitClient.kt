@@ -25,7 +25,7 @@ object RetrofitClient {
                 .build()
 
             instance = Retrofit.Builder()
-                .baseUrl(MyApp.pref.serverAddress)
+                .baseUrl(MyApp.pref.serverAddress + ":8000")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

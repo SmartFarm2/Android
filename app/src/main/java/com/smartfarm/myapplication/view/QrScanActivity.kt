@@ -48,7 +48,7 @@ class QrScanActivity : AppCompatActivity() {
 
             decodeCallback = DecodeCallback {
                 val exp =
-                    "http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}:([0-9]+){3,4}".toRegex()
+                    "http:\\/\\/([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}.([0-9]+){1,3}".toRegex()
                 if (exp.matches(it.text)) {
                     MyApp.pref.serverAddress = it.text
                     startActivity(Intent(this@QrScanActivity, SetPlantTemp::class.java))

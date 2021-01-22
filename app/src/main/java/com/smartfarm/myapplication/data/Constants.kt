@@ -14,12 +14,15 @@ object Constants {
 
     const val SERVER_ADDRESS = "DEFAULT_ADDRESS"
     const val SOCKET_TEMP = "temp"
+    const val SOCKET_TEMP_INSIDE = "tempInside"
+    const val SOCKET_HUMI_INSIDE = "humiInside"
     const val SOCKET_HUMI = "humi"
     const val SOCKET_CYCLE = "cycle"
     const val SOCKET_SET_TEMP = "setTemp"
     const val SOCKET_CYCLE_CHANGE = "changeCycle"
     const val SOCKET_DOOR = "door"
-    const val SOCKET_DOOR_CHANGE = "changeDoor"
+    const val SOCKET_CCTV = ":8080/hls/stream.m3u8"
+    const val CCTV = "cctv"
 
     const val SOCKET_PASSWORD = "password"
 
