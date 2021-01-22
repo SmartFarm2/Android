@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             myViewModel = viewModel
             lifecycleOwner = this@MainActivity
             recycler.adapter = SpecialAdapter()
+
             cycle.infoBox.setOnClickListener {
                 viewModel.setCycle()
             }
@@ -44,14 +45,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, CCTVActivity::class.java))
             }
 
-            refreshView.setOnRefreshListener {
-                viewModel.getWeather()
-                refreshView.isRefreshing = false;
+            weatherBox.infoBox.setOnClickListener {
+                startActivity(Intent(this@MainActivity, WeatherActivity::class.java))
             }
         }
 
         with(viewModel) {
-            getWeather()
             observing()
             toasts.observe(this@MainActivity) {
                 it.getContentIfNotHandled()?.let {

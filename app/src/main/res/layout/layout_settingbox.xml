@@ -61,6 +61,6 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:isBold="@{isBold}"
-            tools:text="@string/weather_info" />
+            tools:text="0℃" />
     </LinearLayout>
 </layout>

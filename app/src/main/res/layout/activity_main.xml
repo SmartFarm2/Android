@@ -22,16 +22,11 @@
             type="com.smartfarm.myapplication.viewmodel.MainActivityViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.MainActivity">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/mainBackgroundColor">
+            android:background="@color/mainBackgroundColor"
+            tools:context=".view.MainActivity">
 
             <Toolbar
                 android:id="@+id/toolbar"
@@ -101,10 +96,11 @@
                         tools:listitem="@layout/layout_special_card" />
                     <!-- Weather and CCTV -->
                     <include
+                        android:id="@+id/weatherBox"
                         name="@{`날씨`}"
-                        endPoint="@{myViewModel.weatherData}"
+                        endPoint="@{myViewModel.tempData.toString()}"
                         img="@{@drawable/ic_sun}"
-                        isBold="@{false}"
+                        isBold="@{true}"
                         layout="@layout/layout_settingbox" />
 
                     <include
@@ -154,6 +150,5 @@
 
             </androidx.core.widget.NestedScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>
