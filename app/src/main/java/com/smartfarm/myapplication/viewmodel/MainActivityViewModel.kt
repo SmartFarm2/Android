@@ -23,8 +23,8 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
 
     var manager: SocketManager
 
-    private var temp = MutableLiveData<Int>()
-    val tempData: LiveData<Int>
+    private var temp = MutableLiveData<String>()
+    val tempData: LiveData<String>
         get() = temp
 
     private var insideTemp = MutableLiveData<Int>()
@@ -47,25 +47,18 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val doorData: LiveData<Boolean>
         get() = door
 
-    private var weather = MutableLiveData<String>()
-    val weatherData: LiveData<String>
-        get() = weather
-
     private var _toasts = MutableLiveData<Event<String>>()
     val toasts: LiveData<Event<String>>
         get() = _toasts
 
-    private val retrofit: Retrofit = RetrofitClient.getInstance()
-    private var weatherService: RetrofitService
-
     init {
-        weatherService = retrofit.create(RetrofitService::class.java)
 
-        temp.value = startingTemp
+        temp.value = "20℃"
         hum.value = startingTemp
+        insideTemp.value = startingTemp
+        insideHum.value = startingTemp
         cycle.value = true
         door.value = true
-        weather.value = "맑음"
 
         manager = SocketManager.getInstance(application)
     }
@@ -89,9 +82,11 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     }
 
     private fun getTemp() {
+        var tempLocalData = 0
         manager.addEvent(Constants.SOCKET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
-                temp.value = it[0] as Int
+                tempLocalData = it[0] as Int
+                temp.value = "$tempLocalData ℃"
             }
         }
     }
@@ -147,31 +142,6 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
             manager.emit(Constants.SOCKET_DOOR, false)
         }else if (door.value == true){
             manager.emit(Constants.SOCKET_DOOR, true)
-        }
-    }
-
-    internal fun getWeather() {
-        CoroutineScope(Dispatchers.IO).launch {
-            //retrofit
-            weatherService.getWeather()
-                .enqueue(object : Callback<WeatherData> {
-                    override fun onResponse(
-                        call: Call<WeatherData>,
-                        response: Response<WeatherData>
-                    ) {
-                        if (response.code() == 200) {
-                            weather.value = response.body()?.weather
-                        } else {
-                            weather.value = "정보 없음"
-                        }
-                        Log.d("weather", "data: ${response.body()}")
-                    }
-
-                    override fun onFailure(call: Call<WeatherData>, t: Throwable) {
-                        _toasts.value = Event("날씨 정보를 받아오지 못하였습니다.");
-                        //Toast.makeText(context, "날씨 정보를 받아오지 못하였습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                })
         }
     }
 }

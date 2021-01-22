@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
             recycler.adapter = SpecialAdapter()
 
-
             cycle.infoBox.setOnClickListener {
                 viewModel.setCycle()
             }
@@ -59,11 +58,13 @@ class MainActivity : AppCompatActivity() {
             refreshView.setOnRefreshListener {
                 viewModel.getWeather()
                 refreshView.isRefreshing = false;
+
+            weatherBox.infoBox.setOnClickListener {
+                startActivity(Intent(this@MainActivity, WeatherActivity::class.java))
             }
         }
 
         with(viewModel) {
-            getWeather()
             observing()
             toasts.observe(this@MainActivity) {
                 it.getContentIfNotHandled()?.let {
