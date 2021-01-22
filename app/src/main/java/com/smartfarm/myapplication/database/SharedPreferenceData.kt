@@ -21,4 +21,7 @@ class SharedPreferenceData(context: Context) {
     var name: String
         get() = pref.getString(Constants.NAME_DATA_KEY, "")!!
         set(value) = pref.edit().putString(Constants.NAME_DATA_KEY, value).apply()
+    var lastCheckNotiTime: Long
+        get() = pref.getLong(Constants.LAST_CHECK_NOTI_KEY, 0)!!
+        set(value) = pref.edit().putLong(Constants.LAST_CHECK_NOTI_KEY, value).apply()
 }

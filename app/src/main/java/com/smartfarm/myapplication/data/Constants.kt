@@ -11,7 +11,7 @@ object Constants {
     const val PASSWORD_DATA_KEY = "PASSWORD_KEY"
     const val OPENER_DATA_KEY = "OPENER_EKY"
     const val NAME_DATA_KEY = "name"
-    const val INIT = "init"
+    const val LAST_CHECK_NOTI_KEY = "noti"
 
     const val SERVER_ADDRESS = "DEFAULT_ADDRESS"
     const val SOCKET_TEMP = "temp"

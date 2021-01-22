@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.WeatherActivity"></activity>
+        <activity android:name=".view.NotiBoxActivity"></activity>
+        <activity android:name=".view.WeatherActivity" />
         <activity
             android:name=".view.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -34,7 +35,7 @@
         <activity android:name=".view.SignActivity" />
         <activity
             android:name=".view.QrActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".view.CCTVActivity" />
 
         <service android:name=".network.SocketService" /> <!-- enabled : 외부 시스템이 알아서 receiver를 실행 -->

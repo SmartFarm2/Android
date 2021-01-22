@@ -8,12 +8,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.smartfarm.myapplication.view.MainActivity
 import com.smartfarm.myapplication.data.Constants
 import com.smartfarm.myapplication.data.Constants.channelID
 import com.smartfarm.myapplication.data.Constants.notificationId
 import com.smartfarm.myapplication.data.Messages
+import com.smartfarm.myapplication.room.DataBase
+import com.smartfarm.myapplication.room.NotiDataBase
+import java.time.LocalDateTime
+import java.util.*
 
 
 class SocketService : Service() {
@@ -106,6 +111,7 @@ class SocketService : Service() {
             setSmallIcon(android.R.drawable.ic_dialog_info)
             priority = NotificationCompat.PRIORITY_MIN
         }.build()
+        saveMessage(title, content)
         startForeground(notificationId - 1, base)
     }
 
@@ -118,5 +124,10 @@ class SocketService : Service() {
                     }
             notificationManager?.createNotificationChannel(channel)
         }
+    }
+
+    private fun saveMessage(title: String, content: String){
+        Log.d("SocketService", "Insert")
+        DataBase.getInstance(applicationContext)!!.dao().insert(NotiDataBase(0, content, title, Calendar.getInstance().timeInMillis))
     }
 }

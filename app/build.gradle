@@ -40,13 +40,21 @@ android {
 dependencies {
 
     def lifecycle_version = "2.2.0"
+    def room_version = "2.2.6"
     def arch_version = "2.1.0"
+
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     implementation 'com.google.android.exoplayer:exoplayer:2.12.2'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.12.2'
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+
 
     implementation 'com.budiyev.android:code-scanner:2.1.0'
 

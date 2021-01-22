@@ -7,24 +7,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.adapter.SpecialAdapter
+import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.data.*
 import com.smartfarm.myapplication.databinding.ActivityMainBinding
-import com.smartfarm.myapplication.network.SocketManager
+import com.smartfarm.myapplication.room.DataBase
 import com.smartfarm.myapplication.viewmodel.MainActivityViewModel
 import com.smartfarm.myapplication.viewmodel.MainActivityViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var viewModelFactory: MainActivityViewModelFactory
-    private lateinit var manager: SocketManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +50,13 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, CCTVActivity::class.java))
             }
 
+            infoBox.notiBox.setOnClickListener {
+                MyApp.pref.lastCheckNotiTime = Calendar.getInstance().timeInMillis
+                startActivity(Intent(this@MainActivity, NotiBoxActivity::class.java))
+            }
+
+
+
             weatherBox.infoBox.setOnClickListener {
                 startActivity(Intent(this@MainActivity, WeatherActivity::class.java))
             }
@@ -65,6 +70,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.infoBox.info = FarmInfoData(DataBase.getInstance(this@MainActivity)!!.dao().getMessageCount(MyApp.pref.lastCheckNotiTime).toInt())
     }
 
     override fun onDestroy() {

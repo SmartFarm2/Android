@@ -67,10 +67,11 @@
 
                     <!-- Top information-->
                     <include
+                        android:id="@+id/info_box"
                         info="@{info}"
                         layout="@layout/layout_infobox"
                         myViewModel="@{myViewModel}"
-                        android:layout_width="wrap_content"
+                        android:layout_width="331dp"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="40dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -123,14 +124,14 @@
                         android:id="@+id/light"
                         name="@{`조명`}"
                         img="@{@drawable/ic_light}"
-                        isOn="@{info.light}"
+                        isOn="@{false}"
                         layout="@layout/layout_bottom_information" />
 
                     <include
                         android:id="@+id/pump"
                         name="@{`펌프`}"
                         img="@{@drawable/ic_pump}"
-                        isOn="@{info.pump}"
+                        isOn="@{false}"
                         layout="@layout/layout_bottom_information" />
 
                     <include
