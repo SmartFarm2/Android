@@ -55,9 +55,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, NotiBoxActivity::class.java))
             }
 
-            refreshView.setOnRefreshListener {
-                viewModel.getWeather()
-                refreshView.isRefreshing = false;
+
 
             weatherBox.infoBox.setOnClickListener {
                 startActivity(Intent(this@MainActivity, WeatherActivity::class.java))
