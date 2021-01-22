@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.NotiBoxActivity"></activity>
+        <activity android:name=".view.SetDoorActivity"></activity>
+        <activity android:name=".view.NotiBoxActivity" />
         <activity android:name=".view.WeatherActivity" />
         <activity
             android:name=".view.SplashActivity"

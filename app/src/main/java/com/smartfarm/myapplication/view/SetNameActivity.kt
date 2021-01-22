@@ -22,7 +22,7 @@ class SetNameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if(MyApp.pref.name != "") {
-            startActivity(Intent(this@SetNameActivity, SignActivity::class.java))
+            startActivity(Intent(this@SetNameActivity, SetDoorActivity::class.java))
             finish()
         }
 
@@ -38,7 +38,7 @@ class SetNameActivity : AppCompatActivity() {
             toasts.observe(this@SetNameActivity) {
                 it.getContentIfNotHandled()?.let {
                     if(it == Constants.NAME_VERIFY_KEY) {
-                        startActivity(Intent(this@SetNameActivity, SignActivity::class.java))
+                        startActivity(Intent(this@SetNameActivity, SetDoorActivity::class.java))
                         finish()
                     }
                     else {

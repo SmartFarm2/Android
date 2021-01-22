@@ -24,4 +24,7 @@ class SharedPreferenceData(context: Context) {
     var lastCheckNotiTime: Long
         get() = pref.getLong(Constants.LAST_CHECK_NOTI_KEY, 0)!!
         set(value) = pref.edit().putLong(Constants.LAST_CHECK_NOTI_KEY, value).apply()
+    var doorSetting: Boolean
+        get() = pref.getBoolean(Constants.DOOR_SET_KEY, true)!!
+        set(value) = pref.edit().putBoolean(Constants.DOOR_SET_KEY, value).apply()
 }
