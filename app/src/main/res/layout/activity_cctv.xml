@@ -86,14 +86,14 @@
                     android:id="@+id/light"
                     name="@{`조명`}"
                     img="@{@drawable/ic_light}"
-                    isOn="@{info.light}"
+                    isOn="@{false}"
                     layout="@layout/layout_mini_information" />
 
                 <include
                     android:id="@+id/pump"
                     name="@{`펌프`}"
                     img="@{@drawable/ic_pump}"
-                    isOn="@{info.pump}"
+                    isOn="@{false}"
                     layout="@layout/layout_mini_information" />
 
             </LinearLayout>

@@ -2,16 +2,21 @@ package com.smartfarm.myapplication.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.adapter.SpecialAdapter
+import com.smartfarm.myapplication.application.MyApp
 import com.smartfarm.myapplication.data.*
 import com.smartfarm.myapplication.databinding.ActivityMainBinding
+import com.smartfarm.myapplication.room.DataBase
 import com.smartfarm.myapplication.viewmodel.MainActivityViewModel
 import com.smartfarm.myapplication.viewmodel.MainActivityViewModelFactory
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +37,8 @@ class MainActivity : AppCompatActivity() {
             myViewModel = viewModel
             lifecycleOwner = this@MainActivity
             recycler.adapter = SpecialAdapter()
+
+
             cycle.infoBox.setOnClickListener {
                 viewModel.setCycle()
             }
@@ -42,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 
             cctvView.infoBox.setOnClickListener {
                 startActivity(Intent(this@MainActivity, CCTVActivity::class.java))
+            }
+
+            infoBox.notiBox.setOnClickListener {
+                MyApp.pref.lastCheckNotiTime = Calendar.getInstance().timeInMillis
+                startActivity(Intent(this@MainActivity, NotiBoxActivity::class.java))
             }
 
             refreshView.setOnRefreshListener {
@@ -59,6 +71,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.infoBox.info = FarmInfoData(DataBase.getInstance(this@MainActivity)!!.dao().getMessageCount(MyApp.pref.lastCheckNotiTime).toInt())
     }
 
     override fun onDestroy() {
