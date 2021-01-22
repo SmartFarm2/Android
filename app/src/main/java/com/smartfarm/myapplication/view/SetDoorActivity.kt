@@ -32,6 +32,7 @@ class SetDoorActivity : AppCompatActivity() {
                 if(it[0] == check) {
                     Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@SetDoorActivity, MainActivity::class.java))
+                    finish()
                 }else{
                     Toast.makeText(this@SetDoorActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
                 }
