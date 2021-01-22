@@ -22,7 +22,7 @@ class SetNameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if(MyApp.pref.name != "") {
-            startActivity(Intent(this@SetNameActivity, SetDoorActivity::class.java))
+            startActivity(Intent(this@SetNameActivity, SignActivity::class.java))
             finish()
         }
 
