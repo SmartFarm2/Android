@@ -25,8 +25,11 @@ object Constants {
     const val SOCKET_SET_TEMP = "setTemp"
     const val SOCKET_CYCLE_CHANGE = "changeCycle"
     const val SOCKET_DOOR = "door"
+    const val SOCKET_START_DOOR = "onTime"
+    const val SOCKET_END_DOOR = "offTime"
     const val SOCKET_CCTV = ":8080/hls/stream.m3u8"
     const val CCTV = "cctv"
+
 
     const val SOCKET_PASSWORD = "password"
 
