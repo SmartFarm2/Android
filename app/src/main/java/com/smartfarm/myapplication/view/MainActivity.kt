@@ -98,21 +98,25 @@ class MainActivity : AppCompatActivity() {
             lateinit var setTemp: Array<Any>
 
             CoroutineScope(Dispatchers.IO).launch {
-                if (MyApp.pref.openerSetting.toInt() == (setTemp[0] as String).toInt() && MyApp.pref.openerSetting.isEmpty()) {
-                    MyApp.pref.openerSetting = setTemp[0] as String
+                setTemp = it
+                if (MyApp.pref.openerSetting.toInt() == (it[0] as String).toInt() || MyApp.pref.openerSetting.isEmpty()) {
+                    MyApp.pref.openerSetting = it[0] as String
                 } else {
-                    sweetAlertDialog
-                        .setTitleText("개폐기 온도 중복")
-                        .setContentText("기기에 이미 개폐기 온도 값이 설정이 되어있습니다. 기기의 온도 값을 사용하시겠습니까?")
-                        .setConfirmText("네")
-                        .setCancelText("아니오")
-                        .setConfirmClickListener {
-                            sweetAlertDialog.dismiss()
-                        }
-                        .setCancelClickListener {
-                            MyApp.pref.openerSetting = setTemp[0] as String
-                        }
-                        .show()
+                    runOnUiThread {
+                        sweetAlertDialog
+                            .setTitleText("개폐기 온도 중복")
+                            .setContentText("기기에 이미 개폐기 온도 값이 설정이 되어있습니다. 기기의 온도 값을 사용하시겠습니까?")
+                            .setConfirmText("네")
+                            .setCancelText("아니오")
+                            .setConfirmClickListener {
+                                MyApp.pref.openerSetting = setTemp[0] as String
+                                sweetAlertDialog.dismiss()
+                            }
+                            .setCancelClickListener {
+                                manager.emit(Constants.SOCKET_SET_TEMP, MyApp.pref.openerSetting)
+                            }
+                            .show()
+                    }
                 }
             }
 
