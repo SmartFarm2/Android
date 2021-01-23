@@ -27,7 +27,7 @@ class SignActivity : AppCompatActivity() {
         manager.addEvent(Constants.SOCKET_PASSWORD) {
             CoroutineScope(Dispatchers.Main).launch {
                 if (it[0] == true) {
-                    if(MyApp.pref.name == "") {
+                    if(MyApp.pref.startDoor == "") {
                         startActivity(Intent(this@SignActivity, SetPlantTemp::class.java))
                         finish()
                     }else {

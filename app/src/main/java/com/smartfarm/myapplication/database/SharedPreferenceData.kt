@@ -30,4 +30,10 @@ class SharedPreferenceData(context: Context) {
     var clientTemp: Int
         get() = pref.getInt(Constants.DOOR_SET_KEY, 0)!!
         set(value) = pref.edit().putInt(Constants.DOOR_SET_KEY, value).apply()
+    var startDoor: String
+        get() = pref.getString(Constants.START_DOOR_KEY, "")!!
+        set(value) = pref.edit().putString(Constants.START_DOOR_KEY, value).apply()
+    var endDoor: String
+        get() = pref.getString(Constants.END_DOOR_KEY, "")!!
+        set(value) = pref.edit().putString(Constants.END_DOOR_KEY, value).apply()
 }

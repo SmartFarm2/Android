@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".view.SetDoorActivity">
 
         <TextView
@@ -40,7 +41,8 @@
             android:background="@drawable/door_background"
             app:layout_constraintBottom_toTopOf="@+id/set_door_next"
             app:layout_constraintHeight_percent="0.21"
-            app:layout_constraintStart_toStartOf="@+id/set_door_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="36dp"
             app:layout_constraintTop_toBottomOf="@+id/set_door_content"
             app:layout_constraintWidth_percent="0.36">
 
@@ -73,9 +75,10 @@
             android:id="@+id/manual_door"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="36dp"
             android:background="@drawable/door_background"
             app:layout_constraintBottom_toTopOf="@+id/set_door_next"
-            app:layout_constraintEnd_toEndOf="@+id/set_door_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.21"
             app:layout_constraintTop_toBottomOf="@+id/set_door_content"
             app:layout_constraintWidth_percent="0.36">

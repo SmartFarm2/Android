@@ -5,7 +5,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.SetTimeActivity">
+        tools:context=".view.SetTimeActivity"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/set_time_title"
@@ -46,11 +47,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:inputType="numberPassword"
+                android:inputType="number"
                 android:maxLength="2"
                 android:maxLines="1"
+                android:textColorHint="@color/exo_gray"
                 android:hint="00"
-                android:textCoor="@color/black"
+                android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -73,12 +75,13 @@
                 android:id="@+id/set_time_end_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="numberPassword"
+                android:inputType="number"
+                android:textColorHint="@color/exo_gray"
                 android:maxLength="2"
                 android:maxLines="1"
                 android:background="@null"
                 android:hint="00"
-                android:textCoor="@color/black"
+                android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
