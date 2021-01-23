@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.adapter.SpecialAdapter
 import com.smartfarm.myapplication.application.MyApp
@@ -81,28 +82,42 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.infoBox.info = FarmInfoData(DataBase.getInstance(this@MainActivity)!!.dao().getMessageCount(MyApp.pref.lastCheckNotiTime).toInt())
+        val sweetAlertDialog =
+            SweetAlertDialog(this@MainActivity, SweetAlertDialog.WARNING_TYPE)
 
+        binding.infoBox.info = FarmInfoData(DataBase.getInstance(this@MainActivity)!!.dao()
+            .getMessageCount(MyApp.pref.lastCheckNotiTime).toInt())
 
         manager.emit(Constants.INIT, 0)
-        manager.addEvent(Constants.AUTO){
+        manager.addEvent(Constants.AUTO) {
             CoroutineScope(Dispatchers.IO).launch {
                 MyApp.pref.doorSetting = it[0] as Boolean
             }
         }
-        manager.addEvent(Constants.SOCKET_SET_TEMP){
-            CoroutineScope(Dispatchers.IO).launch {
-                if(MyApp.pref.clientTemp == it as Int){
-                    MyApp.pref.clientTemp = it[0] as Int
-                }else{
+        manager.addEvent(Constants.SOCKET_SET_TEMP) {
+            lateinit var setTemp: Array<Any>
 
+            CoroutineScope(Dispatchers.IO).launch {
+                if (MyApp.pref.openerSetting.toInt() == (setTemp[0] as String).toInt() && MyApp.pref.openerSetting.isEmpty()) {
+                    MyApp.pref.openerSetting = setTemp[0] as String
+                } else {
+                    sweetAlertDialog
+                        .setTitleText("개폐기 온도 중복")
+                        .setContentText("기기에 이미 개폐기 온도 값이 설정이 되어있습니다. 기기의 온도 값을 사용하시겠습니까?")
+                        .setConfirmText("네")
+                        .setCancelText("아니오")
+                        .setConfirmClickListener {
+                            sweetAlertDialog.dismiss()
+                        }
+                        .setCancelClickListener {
+                            MyApp.pref.openerSetting = setTemp[0] as String
+                        }
+                        .show()
                 }
             }
+
+
         }
-
-    }
-
-    private fun selectTemp(){
 
     }
 

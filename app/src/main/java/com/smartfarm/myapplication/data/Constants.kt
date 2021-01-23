@@ -13,6 +13,7 @@ object Constants {
     const val NAME_DATA_KEY = "name"
     const val LAST_CHECK_NOTI_KEY = "noti"
     const val DOOR_SET_KEY = "DOOR_SET_KEY"
+    const val SET_TEMP = "SET_TEMP"
     const val INIT = "init"
     const val AUTO = "setAuto"
 

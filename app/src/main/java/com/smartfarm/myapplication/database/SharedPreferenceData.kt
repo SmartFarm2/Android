@@ -27,7 +27,4 @@ class SharedPreferenceData(context: Context) {
     var doorSetting: Boolean
         get() = pref.getBoolean(Constants.DOOR_SET_KEY, true)!!
         set(value) = pref.edit().putBoolean(Constants.DOOR_SET_KEY, value).apply()
-    var clientTemp: Int
-        get() = pref.getInt(Constants.DOOR_SET_KEY, 0)!!
-        set(value) = pref.edit().putInt(Constants.DOOR_SET_KEY, value).apply()
 }
