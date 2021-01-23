@@ -13,7 +13,8 @@ object Constants {
     const val NAME_DATA_KEY = "name"
     const val LAST_CHECK_NOTI_KEY = "noti"
     const val DOOR_SET_KEY = "DOOR_SET_KEY"
-    const val SET_TEMP = "SET_TEMP"
+    const val START_DOOR_KEY = "START_DOOR_KEY"
+    const val END_DOOR_KEY = "END_DOOR_KEY"
     const val INIT = "init"
     const val AUTO = "setAuto"
 
@@ -26,8 +27,11 @@ object Constants {
     const val SOCKET_SET_TEMP = "setTemp"
     const val SOCKET_CYCLE_CHANGE = "changeCycle"
     const val SOCKET_DOOR = "door"
+    const val SOCKET_START_DOOR = "onTime"
+    const val SOCKET_END_DOOR = "offTime"
     const val SOCKET_CCTV = ":8080/hls/stream.m3u8"
     const val CCTV = "cctv"
+
 
     const val SOCKET_PASSWORD = "password"
 
