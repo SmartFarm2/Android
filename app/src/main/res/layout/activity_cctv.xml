@@ -17,10 +17,7 @@
             name="info"
             type="com.smartfarm.myapplication.data.FarmInfoData" />
 
-        <variable
-            name="myViewModel"
-            type="com.smartfarm.myapplication.viewmodel.CCTVActivityViewModel" />
-    </data>
+        </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
