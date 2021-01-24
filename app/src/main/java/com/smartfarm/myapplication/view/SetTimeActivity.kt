@@ -3,6 +3,7 @@ package com.smartfarm.myapplication.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
@@ -25,6 +26,8 @@ class SetTimeActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_time)
         manager = SocketManager.getInstance(application)
 
+        Log.d("TAG", "생겨남")
+
         manager.addEvent(Constants.SOCKET_START_DOOR){
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == binding.setTimeStartHour.text.toString().toInt() * 100) {
@@ -33,6 +36,7 @@ class SetTimeActivity : AppCompatActivity() {
                     Toast.makeText(this@SetTimeActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@SetTimeActivity, MainActivity::class.java))
                     finish()
+                    Log.d("TAG", "사라짐")
                 }else{
                     Toast.makeText(this@SetTimeActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
                 }
@@ -51,6 +55,11 @@ class SetTimeActivity : AppCompatActivity() {
         }
 
 
+    }
 
+    override fun onDestroy() {
+        manager.removeEvent(Constants.SOCKET_START_DOOR)
+        manager.removeEvent(Constants.SOCKET_END_DOOR)
+        super.onDestroy()
     }
 }

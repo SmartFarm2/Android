@@ -61,15 +61,6 @@ class CCTVActivity : AppCompatActivity() {
         with(binding) {
             myViewModel = viewModel
             lifecycleOwner = this@CCTVActivity
-
-            cycle.infoBox.setOnClickListener {
-                viewModel.setCycle()
-            }
-
-            door.infoBox.setOnClickListener {
-                viewModel.setDoor()
-            }
-
             playerView = playerV
         }
 

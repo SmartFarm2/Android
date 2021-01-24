@@ -52,7 +52,6 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         get() = _toasts
 
     init {
-
         temp.value = "20℃"
         hum.value = startingTemp
         insideTemp.value = startingTemp
@@ -61,6 +60,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         door.value = true
 
         manager = SocketManager.getInstance(application)
+        manager.socketClear()
     }
 
     fun observing() {
@@ -126,6 +126,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private fun getDoor() {
         manager.addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
+                Log.d("door2", it[0].toString())
                 door.value = it[0] as Boolean
                 Log.d("door", "data: ${door.value}")
             }

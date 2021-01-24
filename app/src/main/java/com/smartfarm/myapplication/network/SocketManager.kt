@@ -74,6 +74,30 @@ class SocketManager(application : Application) {
         Log.i(logKey, "Refresh Finish")
     }
 
+    fun socketClear(){
+        events.keys.forEach {
+            mSocket.off(it)
+        }
+        events.clear()
+        Log.i(logKey, "CLEAR EVENTS")
+
+        addEvent(Socket.EVENT_CONNECT_ERROR) {
+            it.forEach { error ->
+                Log.e(logKey, error.toString())
+            }
+
+            SocketService.makeNotification(application.applicationContext, Constants.DISCONNECTED_KEY)
+        }
+        addEvent(Socket.EVENT_CONNECT) {
+            Log.i(logKey, "Socket connected!")
+            SocketService.makeNotification(application.applicationContext, Constants.CONNECTED_KEY)
+        }
+        addEvent(Socket.EVENT_DISCONNECT) {
+            Log.i(logKey, "Socket disconnected")
+            SocketService.makeNotification(application.applicationContext, Constants.DISCONNECTED_KEY)
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: SocketManager? = null

@@ -21,7 +21,10 @@ class SetDoorActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySetDoorBinding
     private lateinit var manager: SocketManager
     private var check : Boolean? = null
-
+    override fun onDestroy() {
+        super.onDestroy()
+        manager.removeEvent(Constants.AUTO)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

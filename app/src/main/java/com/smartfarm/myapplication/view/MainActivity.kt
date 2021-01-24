@@ -80,6 +80,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        manager.removeEvent(Constants.SOCKET_SET_TEMP)
+        manager.removeEvent(Constants.AUTO)
+    }
     override fun onResume() {
         super.onResume()
         val sweetAlertDialog =
@@ -91,16 +96,19 @@ class MainActivity : AppCompatActivity() {
         manager.emit(Constants.INIT, 0)
         manager.addEvent(Constants.AUTO) {
             CoroutineScope(Dispatchers.IO).launch {
+                Log.d("TAG", "하이")
                 MyApp.pref.doorSetting = it[0] as Boolean
+                Log.d("TAG", "하이2")
             }
         }
-        manager.addEvent(Constants.SOCKET_SET_TEMP) {
-            lateinit var setTemp: Array<Any>
-
+        manager.addEvent(Constants.SOCKET_SET_TEMP) {data ->
+            Log.d("TAG", "하이3")
             CoroutineScope(Dispatchers.IO).launch {
-                setTemp = it
-                if (MyApp.pref.openerSetting.toInt() == (it[0] as String).toInt() || MyApp.pref.openerSetting.isEmpty()) {
-                    MyApp.pref.openerSetting = it[0] as String
+                Log.d("TAG", "하이4")
+                if (MyApp.pref.openerSetting.toInt() == (data[0] as String).toInt() || MyApp.pref.openerSetting.isEmpty()) {
+                    Log.d("TAG", "하이5")
+                    MyApp.pref.openerSetting = data[0] as String
+                    Log.d("TAG", "하이6")
                 } else {
                     runOnUiThread {
                         sweetAlertDialog
@@ -109,7 +117,7 @@ class MainActivity : AppCompatActivity() {
                             .setConfirmText("네")
                             .setCancelText("아니오")
                             .setConfirmClickListener {
-                                MyApp.pref.openerSetting = setTemp[0] as String
+                                MyApp.pref.openerSetting = data[0] as String
                                 sweetAlertDialog.dismiss()
                             }
                             .setCancelClickListener {
@@ -118,9 +126,10 @@ class MainActivity : AppCompatActivity() {
                             .show()
                     }
                 }
+                Log.d("TAG", "하이7")
             }
 
-
+            Log.d("TAG", "하이8")
         }
 
     }

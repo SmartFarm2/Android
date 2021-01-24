@@ -53,7 +53,7 @@ class CCTVActivityViewModel(application: Application) : ViewModel() {
             CoroutineScope(Dispatchers.Main).launch {
                 val array = it[0].toString().split(",").map { it == "True" }.toList()
                 door.value = array[0]
-                secondDoor.value = array[1]
+                //secondDoor.value = array[1]
             }
         }
     }
@@ -65,9 +65,9 @@ class CCTVActivityViewModel(application: Application) : ViewModel() {
 
     internal fun setDoor() {
         if(door.value == true){
-            manager.emit(Constants.SOCKET_DOOR, "off")
+            manager.emit(Constants.SOCKET_DOOR, true)
         }else if (door.value == false){
-            manager.emit(Constants.SOCKET_DOOR, "on")
+            manager.emit(Constants.SOCKET_DOOR, false)
         }
     }
 }

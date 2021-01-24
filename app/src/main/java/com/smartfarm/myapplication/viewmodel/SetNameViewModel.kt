@@ -25,4 +25,5 @@ class SetNameViewModel() : ViewModel(){
             _toasts.value = Event(Constants.NAME_VERIFY_KEY)
         }
     }
+
 }
