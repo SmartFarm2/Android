@@ -33,4 +33,13 @@
     <string name="farm_connect">농장 등록</string>
     <string name="next">다음</string>
     <string name="input_name">이름 입력</string>
+    <string name="setting">setting</string>
+    <string name="setting_box">settingBox</string>
+    <string name="door_setting">개폐기 설정</string>
+    <string name="door_setting_content">개폐기를 어떻게 설정할지 정해주세요.</string>
+    <string name="door_set">개폐기 재설정</string>
+    <string name="setting_title">설정</string>
+    <string name="farm_Data">농장 설정</string>
+    <string name="door_state_setting">농장 자동/수동 재설정</string>
+    <string name="farm_delete">농장 삭제</string>
 </resources>

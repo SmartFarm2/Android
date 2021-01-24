@@ -28,12 +28,13 @@
             android:background="@color/mainBackgroundColor"
             tools:context=".view.MainActivity">
 
-            <Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:elevation="10dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -46,7 +47,17 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:text="준혁이의 농장" />
-            </Toolbar>
+
+                <ImageView
+                    android:id="@+id/setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_setting"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/setting" />
+
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scrollView2"
@@ -98,7 +109,7 @@
                     <!-- Weather and CCTV -->
                     <include
                         android:id="@+id/weatherBox"
-                        name="@{`날씨`}"
+                        name="@{`날씨(외부 온습도)`}"
                         endPoint="@{myViewModel.tempData.toString()}"
                         img="@{@drawable/ic_sun}"
                         isBold="@{true}"
@@ -147,6 +158,7 @@
                         img="@{@drawable/ic_door}"
                         isOn="@{myViewModel.doorData}"
                         layout="@layout/layout_bottom_information" />
+
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>

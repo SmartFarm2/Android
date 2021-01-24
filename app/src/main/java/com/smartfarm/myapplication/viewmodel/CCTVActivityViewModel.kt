@@ -1,6 +1,7 @@
 package com.smartfarm.myapplication.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,23 +52,10 @@ class CCTVActivityViewModel(application: Application) : ViewModel() {
     private fun getDoor() {
         manager.addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
-                val array = it[0].toString().split(",").map { it == "True" }.toList()
-                door.value = array[0]
-                //secondDoor.value = array[1]
+                Log.d("door2", it[0].toString())
+                door.value = it[0] as Boolean
+                Log.d("door", "data: ${door.value}")
             }
-        }
-    }
-
-    internal fun setCycle() {
-        manager.emit(Constants.SOCKET_CYCLE_CHANGE, cycle.value!!.not())
-        cycle.value = cycle.value?.not()
-    }
-
-    internal fun setDoor() {
-        if(door.value == true){
-            manager.emit(Constants.SOCKET_DOOR, true)
-        }else if (door.value == false){
-            manager.emit(Constants.SOCKET_DOOR, false)
         }
     }
 }

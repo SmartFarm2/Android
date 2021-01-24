@@ -51,6 +51,17 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val toasts: LiveData<Event<String>>
         get() = _toasts
 
+    private var weather = MutableLiveData<String>()
+    val weatherData: LiveData<String>
+        get() = weather
+
+    private var sky = MutableLiveData<String>()
+    val skyData: LiveData<String>
+        get() = sky
+
+    private val retrofit: Retrofit = RetrofitClient.getInstance()
+    private var weatherService: RetrofitService
+
     init {
         temp.value = "20℃"
         hum.value = startingTemp
@@ -58,12 +69,14 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         insideHum.value = startingTemp
         cycle.value = true
         door.value = true
+        weather.value = "맑음"
 
+        weatherService = retrofit.create(RetrofitService::class.java)
         manager = SocketManager.getInstance(application)
-        manager.socketClear()
     }
 
     fun observing() {
+        manager.socketClear()
         getTemp()
         getHumi()
         getCycle()
@@ -139,10 +152,41 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     }
 
     internal fun setDoor() {
-        if(door.value == false){
+        if (door.value == false) {
             manager.emit(Constants.SOCKET_DOOR, false)
-        }else if (door.value == true){
+        } else if (door.value == true) {
             manager.emit(Constants.SOCKET_DOOR, true)
+        }
+    }
+
+    internal fun getWeather() {
+        CoroutineScope(Dispatchers.IO).launch {
+            //retrofit
+            weatherService.getWeather()
+                .enqueue(object : Callback<WeatherData> {
+                    override fun onResponse(
+                        call: Call<WeatherData>,
+                        response: Response<WeatherData>,
+                    ) {
+
+                        when (response.code()) {
+                            200 -> {
+                                weather.value = response.body()?.weather
+                                sky.value = response.body()?.sky
+                            }
+                            else -> {
+                                weather.value = "정보 없음"
+                                sky.value = "정보 없음"
+                            }
+                        }
+                        Log.d("weather", "data: ${response.body()}")
+                    }
+
+                    override fun onFailure(call: Call<WeatherData>, t: Throwable) {
+                        _toasts.value = Event("날씨 정보를 받아오지 못하였습니다.");
+                        //Toast.makeText(context, "날씨 정보를 받아오지 못하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                })
         }
     }
 }

@@ -31,11 +31,16 @@ class SetTimeActivity : AppCompatActivity() {
         manager.addEvent(Constants.SOCKET_START_DOOR){
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == binding.setTimeStartHour.text.toString().toInt() * 100) {
+                    if (MyApp.pref.startDoor == ""){
+                        startActivity(Intent(this@SetTimeActivity, MainActivity::class.java))
+                        finish()
+                    }else{
+                        finish()
+                    }
                     MyApp.pref.startDoor = (binding.setTimeStartHour.text.toString().toInt() * 100).toString()
                     MyApp.pref.endDoor = (binding.setTimeEndHour.text.toString().toInt() * 100).toString()
                     Toast.makeText(this@SetTimeActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@SetTimeActivity, MainActivity::class.java))
-                    finish()
+
                     Log.d("TAG", "사라짐")
                 }else{
                     Toast.makeText(this@SetTimeActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
