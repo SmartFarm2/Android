@@ -162,7 +162,7 @@
                     <include
                         android:id="@+id/voltage"
                         name="@{`220V`}"
-                        img="@{@drawable/ic_light}"
+                        img="@{@drawable/ic_volt}"
                         isOn="@{myViewModel.voltageData}"/>
 
                     <include
