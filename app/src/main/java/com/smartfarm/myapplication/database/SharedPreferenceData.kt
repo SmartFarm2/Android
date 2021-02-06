@@ -39,10 +39,10 @@ class SharedPreferenceData(context: Context) {
     var endDoor: String
         get() = pref.getString(Constants.END_DOOR_KEY, "")!!
         set(value) = pref.edit().putString(Constants.END_DOOR_KEY, value).apply()
-    var startLight: String
-        get() = pref.getString(Constants.START_LIGHT_KEY, "")!!
+    var startVoltage: String
+        get() = pref.getString(Constants.START_VOLTAGE_KEY, "")!!
         set(value) = pref.edit().putString(Constants.START_DOOR_KEY, value).apply()
-    var endLight: String
-        get() = pref.getString(Constants.END_LIGHT_KEY, "")!!
+    var endVoltage: String
+        get() = pref.getString(Constants.END_VOLTAGE_KEY, "")!!
         set(value) = pref.edit().putString(Constants.END_DOOR_KEY, value).apply()
 }

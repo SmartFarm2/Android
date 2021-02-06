@@ -27,7 +27,6 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     val statusData : LiveData<Int>
         get() = status
 
-
     init {
         status.value = 0
     }

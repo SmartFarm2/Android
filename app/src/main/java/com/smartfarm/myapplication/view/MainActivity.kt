@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity() {
                 viewModel.setDoor()
             }
 
+            door2.infoBox.setOnClickListener {
+                viewModel.setDoor2()
+            }
+
             cctvView.infoBox.setOnClickListener {
                 startActivity(Intent(this@MainActivity, CCTVActivity::class.java))
             }
@@ -73,10 +77,6 @@ class MainActivity : AppCompatActivity() {
 
             voltage.infoBox.setOnClickListener {
                 viewModel.setVoltage()
-            }
-
-            light.infoBox.setOnClickListener {
-                viewModel.setLight()
             }
 
             pump.infoBox.setOnClickListener {

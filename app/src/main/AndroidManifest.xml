@@ -18,8 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.SetPumpActivity"></activity>
-        <activity android:name=".view.SetLightActivity" />
+        <activity android:name=".view.SetVoltageAutoActivity"></activity>
+        <activity android:name=".view.SetPumpAutoActivity" />
+        <activity android:name=".view.SetPumpActivity" />
+        <activity android:name=".view.SetVoltActivity" />
         <activity android:name=".view.SettingActivity" />
         <activity android:name=".view.SetTimeActivity" />
         <activity android:name=".view.SetDoorActivity" />

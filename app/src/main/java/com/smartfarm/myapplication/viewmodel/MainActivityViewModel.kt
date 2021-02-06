@@ -35,10 +35,6 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val humData: LiveData<Int>
         get() = hum
 
-    private var light = MutableLiveData<Boolean>()
-    val lightData: LiveData<Boolean>
-        get() = light
-
     private var pump = MutableLiveData<Boolean>()
     val pumpData: LiveData<Boolean>
         get() = pump
@@ -89,6 +85,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
 
         weatherService = retrofit.create(RetrofitService::class.java)
         manager = SocketManager.getInstance(application)
+        manager.emit(Constants.INIT, "init")
     }
 
     fun observing() {
@@ -97,15 +94,16 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         getHumi()
         getCycle()
         getDoor()
+        getDoor2()
         getInsideTemp()
         getInsideHumi()
         getVoltage()
-        getLight()
         getPump()
     }
 
     fun deobserving() {
         manager.removeEvent(Constants.SOCKET_DOOR)
+        manager.removeEvent(Constants.SOCKET_DOOR2)
         manager.removeEvent(Constants.SOCKET_CYCLE)
         manager.removeEvent(Constants.SOCKET_TEMP)
         manager.removeEvent(Constants.SOCKET_HUMI)
@@ -167,17 +165,15 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private fun getDoor() {
         manager.addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
-                Log.d("door2", it[0].toString())
                 door.value = it[0] as Boolean
-                Log.d("door", "data: ${door.value}")
             }
         }
     }
 
-    private fun getLight() {
-        manager.addEvent(Constants.SOCKET_LIGHT) {
+    private fun getDoor2() {
+        manager.addEvent(Constants.SOCKET_DOOR2) {
             CoroutineScope(Dispatchers.Main).launch {
-                light.value = it[0] as Boolean
+                door2.value = it[0] as Boolean
             }
         }
     }
@@ -195,13 +191,6 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         cycle.value = cycle.value?.not()
     }
 
-    internal fun setLight() {
-        if (door.value == false) {
-            manager.emit(Constants.SOCKET_LIGHT, false)
-        } else if (door.value == true) {
-            manager.emit(Constants.SOCKET_LIGHT, true)
-        }
-    }
 
     internal fun setPump() {
         if (door.value == false) {
@@ -212,6 +201,14 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     }
 
     internal fun setDoor() {
+        if (door.value == false) {
+            manager.emit(Constants.SOCKET_DOOR, false)
+        } else if (door.value == true) {
+            manager.emit(Constants.SOCKET_DOOR, true)
+        }
+    }
+
+    internal fun setDoor2() {
         if (door.value == false) {
             manager.emit(Constants.SOCKET_DOOR, false)
         } else if (door.value == true) {
