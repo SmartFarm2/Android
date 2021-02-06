@@ -63,6 +63,10 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val skyData: LiveData<String>
         get() = sky
 
+    private var voltage = MutableLiveData<Boolean>()
+    val voltageData: LiveData<Boolean>
+        get() = voltage
+
     private val retrofit: Retrofit = RetrofitClient.getInstance()
     private var weatherService: RetrofitService
 
@@ -87,6 +91,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         getDoor()
         getInsideTemp()
         getInsideHumi()
+        getVoltage()
     }
 
     fun deobserving() {
@@ -96,6 +101,14 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         manager.removeEvent(Constants.SOCKET_HUMI)
         manager.removeEvent(Constants.SOCKET_TEMP_INSIDE)
         manager.removeEvent(Constants.SOCKET_HUMI_INSIDE)
+    }
+
+    private fun getVoltage() {
+        manager.addEvent(Constants.SOCKET_VOLTAGE) {
+            CoroutineScope(Dispatchers.Main).launch {
+                voltage.value = it[0] as Boolean
+            }
+        }
     }
 
     private fun getTemp() {

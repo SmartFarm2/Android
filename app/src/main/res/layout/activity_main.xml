@@ -160,6 +160,12 @@
                         layout="@layout/layout_bottom_information" />
 
                     <include
+                        android:id="@+id/voltage"
+                        name="@{`220V`}"
+                        img="@{@drawable/ic_light}"
+                        isOn="@{myViewModel.voltageData}"/>
+
+                    <include
                         android:id="@+id/door2"
                         name="@{`개폐기2`}"
                         img="@{@drawable/ic_door}"
