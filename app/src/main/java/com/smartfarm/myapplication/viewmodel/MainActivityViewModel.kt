@@ -35,6 +35,14 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val humData: LiveData<Int>
         get() = hum
 
+    private var light = MutableLiveData<Boolean>()
+    val lightData: LiveData<Boolean>
+        get() = light
+
+    private var pump = MutableLiveData<Boolean>()
+    val pumpData: LiveData<Boolean>
+        get() = pump
+
     private var insideHum = MutableLiveData<Int>()
     val insideHumData: LiveData<Int>
         get() = insideHum
@@ -92,6 +100,8 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         getInsideTemp()
         getInsideHumi()
         getVoltage()
+        getLight()
+        getPump()
     }
 
     fun deobserving() {
@@ -164,9 +174,45 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         }
     }
 
+    private fun getLight() {
+        manager.addEvent(Constants.SOCKET_LIGHT) {
+            CoroutineScope(Dispatchers.Main).launch {
+                Log.d("door2", it[0].toString())
+                light.value = it[0] as Boolean
+                Log.d("door", "data: ${door.value}")
+            }
+        }
+    }
+
+    private fun getPump() {
+        manager.addEvent(Constants.SOCKET_PUMP) {
+            CoroutineScope(Dispatchers.Main).launch {
+                Log.d("door2", it[0].toString())
+                pump.value = it[0] as Boolean
+                Log.d("door", "data: ${door.value}")
+            }
+        }
+    }
+
     internal fun setCycle() {
         manager.emit(Constants.SOCKET_CYCLE_CHANGE, cycle.value!!.not())
         cycle.value = cycle.value?.not()
+    }
+
+    internal fun setLight() {
+        if (door.value == false) {
+            manager.emit(Constants.SOCKET_LIGHT, false)
+        } else if (door.value == true) {
+            manager.emit(Constants.SOCKET_LIGHT, true)
+        }
+    }
+
+    internal fun setPump() {
+        if (door.value == false) {
+            manager.emit(Constants.SOCKET_PUMP, false)
+        } else if (door.value == true) {
+            manager.emit(Constants.SOCKET_PUMP, true)
+        }
     }
 
     internal fun setDoor() {

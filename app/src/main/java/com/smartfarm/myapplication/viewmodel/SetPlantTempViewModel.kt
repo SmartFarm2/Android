@@ -27,18 +27,29 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     val statusData : LiveData<String>
         get() = status
 
+    private var status2 = MutableLiveData<String>()
+    val statusData2 : LiveData<String>
+        get() = status2
+
     fun observing() {
         getSetTempState()
     }
 
     fun deobserving() {
         manager.removeEvent(Constants.SOCKET_SET_TEMP)
+        manager.removeEvent(Constants.SOCKET_SET_TEMP2)
     }
 
     private fun getSetTempState(){
         manager.addEvent(Constants.SOCKET_SET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
                 status.value = it[0] as String
+            }
+        }
+
+        manager.addEvent(Constants.SOCKET_SET_TEMP2) {
+            CoroutineScope(Dispatchers.Main).launch {
+                status2.value = it[0] as String
             }
         }
     }
@@ -49,6 +60,7 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
         }
         else{
             manager.emit(Constants.SOCKET_SET_TEMP, plantTemp.value.toString())
+            manager.emit(Constants.SOCKET_SET_TEMP2, plantTemp2.value.toString())
         }
     }
 }

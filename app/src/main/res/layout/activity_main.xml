@@ -135,14 +135,14 @@
                         android:id="@+id/light"
                         name="@{`조명`}"
                         img="@{@drawable/ic_light}"
-                        isOn="@{false}"
+                        isOn="@{myViewModel.lightData}"
                         layout="@layout/layout_bottom_information" />
 
                     <include
                         android:id="@+id/pump"
                         name="@{`펌프`}"
                         img="@{@drawable/ic_pump}"
-                        isOn="@{false}"
+                        isOn="@{myViewModel.pumpData}"
                         layout="@layout/layout_bottom_information" />
 
                     <include
@@ -160,17 +160,18 @@
                         layout="@layout/layout_bottom_information" />
 
                     <include
-                        android:id="@+id/voltage"
-                        name="@{`220V`}"
-                        img="@{@drawable/ic_volt}"
-                        isOn="@{myViewModel.voltageData}"/>
-
-                    <include
                         android:id="@+id/door2"
                         name="@{`개폐기2`}"
                         img="@{@drawable/ic_door}"
                         isOn="@{myViewModel.doorData2}"
                         layout="@layout/layout_bottom_information" />
+
+                    <include
+                        android:id="@+id/voltage"
+                        name="@{`220V`}"
+                        img="@{@drawable/ic_volt}"
+                        isOn="@{myViewModel.voltageData}"
+                        layout="@layout/layout_bottom_information"/>
 
                 </LinearLayout>
 

@@ -71,8 +71,16 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, SettingActivity::class.java))
             }
 
-            voltage.setOnClickListener {
+            voltage.infoBox.setOnClickListener {
                 viewModel.setVoltage()
+            }
+
+            light.infoBox.setOnClickListener {
+                viewModel.setLight()
+            }
+
+            pump.infoBox.setOnClickListener {
+                viewModel.setPump()
             }
         }
 
