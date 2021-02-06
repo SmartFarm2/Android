@@ -30,7 +30,7 @@ class SetLightActivity : AppCompatActivity() {
         manager.addEvent(Constants.SOCKET_START_DOOR){
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == binding.setLightStartHour.text.toString().toInt() * 100) {
-                    if (MyApp.pref.startDoor == ""){
+                    if (MyApp.pref.startLight == ""){
                         startActivity(Intent(this@SetLightActivity, SetPumpActivity::class.java))
                         finish()
                     }else{
