@@ -27,11 +27,13 @@ class SetVoltActivity : AppCompatActivity() {
 
         Log.d("TAG", "생겨남")
 
+        var isFirst = intent.getStringExtra("volt")
+
         manager.addEvent(Constants.SOCKET_START_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
                 if (it[0] == binding.setVoltStartVoltage.text.toString().toInt() * 100) {
                     if (MyApp.pref.startVoltage == "") {
-                        startActivity(Intent(this@SetVoltActivity, SetVoltageAutoActivity::class.java))
+                        startActivity(Intent(this@SetVoltActivity, SetVoltageAutoActivity::class.java).putExtra("volt", isFirst))
                         finish()
                     } else {
                         finish()

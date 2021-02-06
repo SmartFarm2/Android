@@ -24,14 +24,21 @@ class SetVoltageAutoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var isFirst = intent.getStringExtra("door")
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_voltage_auto)
         manager = SocketManager.getInstance(application)
 
         manager.addEvent(Constants.SOCKET_VOLTAGE_AUTO){
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == check) {
-                    Toast.makeText(this@SetVoltageAutoActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@SetVoltageAutoActivity, SetPumpActivity::class.java))
+                    if(isFirst == "volt") {
+                        Toast.makeText(this@SetVoltageAutoActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@SetVoltageAutoActivity, MainActivity::class.java))
+                    }else{
+                        Toast.makeText(this@SetVoltageAutoActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@SetVoltageAutoActivity, SetPumpActivity::class.java))
+                    }
                 }else{
                     Toast.makeText(this@SetVoltageAutoActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
                 }
