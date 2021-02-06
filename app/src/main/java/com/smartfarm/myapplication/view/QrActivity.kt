@@ -18,7 +18,7 @@ class QrActivity : AppCompatActivity() {
         setTheme(R.style.Theme_MyApplication)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qr)
         if(MyApp.pref.serverAddress != Constants.SERVER_ADDRESS) {
-            startActivity(Intent(this, SignActivity::class.java))
+            startActivity(Intent(this,  SetPlantTemp::class.java))
             finish()
         }
 

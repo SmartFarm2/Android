@@ -22,6 +22,11 @@ class SetPlantTemp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if(MyApp.pref.startDoor != "") {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_plant_temp)
 
         viewModelFactory = SetPlantViewModelFactory(application)
