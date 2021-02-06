@@ -32,7 +32,7 @@ class SetTimeActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == binding.setTimeStartHour.text.toString().toInt() * 100) {
                     if (MyApp.pref.startDoor == ""){
-                        startActivity(Intent(this@SetTimeActivity, MainActivity::class.java))
+                        startActivity(Intent(this@SetTimeActivity, SetPumpActivity::class.java))
                         finish()
                     }else{
                         finish()

@@ -15,6 +15,8 @@ object Constants {
     const val DOOR_SET_KEY = "DOOR_SET_KEY"
     const val START_DOOR_KEY = "START_DOOR_KEY"
     const val END_DOOR_KEY = "END_DOOR_KEY"
+    const val START_LIGHT_KEY = "START_DOOR_KEY"
+    const val END_LIGHT_KEY = "END_DOOR_KEY"
     const val INIT = "init"
     const val AUTO = "setAuto"
 
@@ -29,6 +31,8 @@ object Constants {
     const val SOCKET_DOOR = "door"
     const val SOCKET_START_DOOR = "onTime"
     const val SOCKET_END_DOOR = "offTime"
+    const val SOCKET_START_Light = "onTime"
+    const val SOCKET_END_Light = "offTime"
     const val SOCKET_CCTV = ":8080/hls/stream.m3u8"
     const val CCTV = "cctv"
 
