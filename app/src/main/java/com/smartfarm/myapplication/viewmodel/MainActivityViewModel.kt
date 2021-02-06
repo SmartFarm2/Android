@@ -101,6 +101,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         manager.removeEvent(Constants.SOCKET_HUMI)
         manager.removeEvent(Constants.SOCKET_TEMP_INSIDE)
         manager.removeEvent(Constants.SOCKET_HUMI_INSIDE)
+        manager.removeEvent(Constants.SOCKET_VOLTAGE)
     }
 
     private fun getVoltage() {
@@ -173,6 +174,14 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
             manager.emit(Constants.SOCKET_DOOR, false)
         } else if (door.value == true) {
             manager.emit(Constants.SOCKET_DOOR, true)
+        }
+    }
+
+    internal fun setVoltage() {
+        if (voltage.value == false) {
+            manager.emit(Constants.SOCKET_VOLTAGE, false)
+        } else if (voltage.value == true) {
+            manager.emit(Constants.SOCKET_VOLTAGE, true)
         }
     }
 

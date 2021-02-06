@@ -70,6 +70,10 @@ class MainActivity : AppCompatActivity() {
             setting.setOnClickListener {
                 startActivity(Intent(this@MainActivity, SettingActivity::class.java))
             }
+
+            voltage.setOnClickListener {
+                viewModel.setVoltage()
+            }
         }
 
         with(viewModel) {
