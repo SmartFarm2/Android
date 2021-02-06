@@ -34,7 +34,7 @@ class SetNameActivity : AppCompatActivity() {
             toasts.observe(this@SetNameActivity) {
                 it.getContentIfNotHandled()?.let {
                     if(it == Constants.NAME_VERIFY_KEY) {
-                        startActivity(Intent(this@SetNameActivity, SetDoorActivity::class.java))
+                        startActivity(Intent(this@SetNameActivity, SetTimeActivity::class.java))
                         finish()
                     }
                     else {

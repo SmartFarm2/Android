@@ -19,7 +19,17 @@ class SettingActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this@SettingActivity, R.layout.activity_setting)
 
         binding.doorTimeSetting.setOnClickListener {
-            startActivity(Intent(this, SetDoorActivity::class.java))
+            startActivity(Intent(this, SetTimeActivity::class.java).putExtra("door", "door"))
+            finish()
+        }
+
+        binding.pumpTimeSetting.setOnClickListener {
+            startActivity(Intent(this, SetPumpActivity::class.java))
+            finish()
+        }
+
+        binding.voltageTimeSetting.setOnClickListener {
+            startActivity(Intent(this, SetVoltActivity::class.java).putExtra("volt", "volt"))
             finish()
         }
 

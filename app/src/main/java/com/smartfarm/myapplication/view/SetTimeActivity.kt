@@ -28,11 +28,13 @@ class SetTimeActivity : AppCompatActivity() {
 
         Log.d("TAG", "생겨남")
 
+        var isFirst = intent.getStringExtra("door")
+
         manager.addEvent(Constants.SOCKET_START_DOOR){
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == binding.setTimeStartHour.text.toString().toInt() * 100) {
                     if (MyApp.pref.startDoor == ""){
-                        startActivity(Intent(this@SetTimeActivity, SetVoltActivity::class.java))
+                        startActivity(Intent(this@SetTimeActivity, SetDoorActivity::class.java).putExtra("door", isFirst))
                         finish()
                     }else{
                         finish()

@@ -37,7 +37,7 @@ class SetDoorActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 if(it[0] == check) {
                     Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@SetDoorActivity, SetTimeActivity::class.java))
+                    startActivity(Intent(this@SetDoorActivity, SetVoltActivity::class.java))
                     finish()
                 }else{
                     Toast.makeText(this@SetDoorActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
