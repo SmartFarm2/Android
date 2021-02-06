@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
@@ -24,7 +25,7 @@ class SetVoltageAutoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var isFirst = intent.getStringExtra("door")
+        var isFirst = intent.getStringExtra("volt")
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_voltage_auto)
         manager = SocketManager.getInstance(application)
@@ -35,9 +36,11 @@ class SetVoltageAutoActivity : AppCompatActivity() {
                     if(isFirst == "volt") {
                         Toast.makeText(this@SetVoltageAutoActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@SetVoltageAutoActivity, MainActivity::class.java))
+                        ActivityCompat.finishAffinity(this@SetVoltageAutoActivity)
                     }else{
                         Toast.makeText(this@SetVoltageAutoActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@SetVoltageAutoActivity, SetPumpActivity::class.java))
+                        finish()
                     }
                 }else{
                     Toast.makeText(this@SetVoltageAutoActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
@@ -68,5 +71,11 @@ class SetVoltageAutoActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+
+    override fun onDestroy() {
+        manager.removeEvent(Constants.SOCKET_VOLTAGE_AUTO)
+        super.onDestroy()
     }
 }

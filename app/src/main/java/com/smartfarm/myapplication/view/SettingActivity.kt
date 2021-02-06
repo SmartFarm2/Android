@@ -3,6 +3,7 @@ package com.smartfarm.myapplication.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
 import com.smartfarm.myapplication.application.MyApp
@@ -34,4 +35,5 @@ class SettingActivity : AppCompatActivity() {
         }
 
     }
+
 }

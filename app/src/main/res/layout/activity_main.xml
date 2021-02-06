@@ -150,14 +150,14 @@
                         android:id="@+id/door"
                         name="@{`개폐기`}"
                         img="@{@drawable/ic_door}"
-                        isOn="@{myViewModel.doorData}"
+                        isOn="@{myViewModel.doorData == 2}"
                         layout="@layout/layout_bottom_information" />
 
                     <include
                         android:id="@+id/door2"
                         name="@{`개폐기2`}"
                         img="@{@drawable/ic_door}"
-                        isOn="@{myViewModel.doorData2}"
+                        isOn="@{myViewModel.doorData2 == 2}"
                         layout="@layout/layout_bottom_information" />
 
                     <include

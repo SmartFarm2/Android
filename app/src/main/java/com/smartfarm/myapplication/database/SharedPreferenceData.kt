@@ -45,4 +45,7 @@ class SharedPreferenceData(context: Context) {
     var endVoltage: String
         get() = pref.getString(Constants.END_VOLTAGE_KEY, "")!!
         set(value) = pref.edit().putString(Constants.END_DOOR_KEY, value).apply()
+    var pump: String
+        get() = pref.getString(Constants.PUMP_DATA_KEY, "")!!
+        set(value) = pref.edit().putString(Constants.PUMP_DATA_KEY, value).apply()
 }

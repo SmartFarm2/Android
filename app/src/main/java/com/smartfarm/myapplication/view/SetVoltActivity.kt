@@ -29,21 +29,18 @@ class SetVoltActivity : AppCompatActivity() {
 
         var isFirst = intent.getStringExtra("volt")
 
-        manager.addEvent(Constants.SOCKET_START_DOOR) {
+        manager.addEvent(Constants.SOCKET_START_VOLTAGE) {
             CoroutineScope(Dispatchers.Main).launch {
+                Log.d("TAG", "성고23")
                 if (it[0] == binding.setVoltStartVoltage.text.toString().toInt() * 100) {
-                    if (MyApp.pref.startVoltage == "") {
-                        startActivity(Intent(this@SetVoltActivity, SetVoltageAutoActivity::class.java).putExtra("volt", isFirst))
-                        finish()
-                    } else {
-                        finish()
-                    }
                     MyApp.pref.startVoltage =
                         (binding.setVoltStartVoltage.text.toString().toInt() * 100).toString()
                     MyApp.pref.endVoltage =
                         (binding.setVoltEndVoltage.text.toString().toInt() * 100).toString()
                     Toast.makeText(this@SetVoltActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@SetVoltActivity, SetVoltageAutoActivity::class.java).putExtra("volt", isFirst))
 
+                    finish()
                     Log.d("TAG", "사라짐")
                 } else {
                     Toast.makeText(this@SetVoltActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT)
@@ -59,6 +56,7 @@ class SetVoltActivity : AppCompatActivity() {
                     && setVoltStartVoltage.text.toString().toInt() < 24
                     && setVoltEndVoltage.text.toString().toInt() < 24
                 ) {
+                    Log.d("TAG", "성고233")
                     manager.emit(Constants.SOCKET_START_VOLTAGE,
                         setVoltStartVoltage.text.toString().toInt() * 100)
                     manager.emit(Constants.SOCKET_END_VOLTAGE,

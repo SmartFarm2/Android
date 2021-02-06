@@ -43,24 +43,19 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     private fun getSetTempState(){
         manager.addEvent(Constants.SOCKET_SET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
+                Log.d("TAG", "통과2")
                 status.value = status.value?.plus(1)
             }
         }
 
-        manager.addEvent(Constants.SOCKET_SET_TEMP2) {
-            CoroutineScope(Dispatchers.Main).launch {
-                status.value = status.value?.plus(1)
-            }
-        }
     }
 
     fun setTemp(){
-        if(plantTemp.value.isNullOrBlank() && plantTemp2.value.isNullOrBlank()) {
+        if(plantTemp.value.isNullOrBlank()) {
             _toasts.value = Event("온도값을 설정해 주십시오.")
         }
         else{
             manager.emit(Constants.SOCKET_SET_TEMP, plantTemp.value.toString())
-            manager.emit(Constants.SOCKET_SET_TEMP2, plantTemp2.value.toString())
         }
     }
 }

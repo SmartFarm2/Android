@@ -6,14 +6,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.SetPumpAutoActivity">
+        tools:context=".view.SetPumpAutoActivity"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/set_pump_auto_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="펌 설정"
+            android:text="펌프 설정"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -98,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="자동 제어"
+                android:text="수동 제어"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.smartfarm.myapplication.R
@@ -44,7 +45,7 @@ class SetDoorActivity : AppCompatActivity() {
                             Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
                                 .show()
                             startActivity(Intent(this@SetDoorActivity, MainActivity::class.java))
-                            finish()
+                            ActivityCompat.finishAffinity(this@SetDoorActivity)
                         } else {
                             Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
                                 .show()
@@ -58,7 +59,7 @@ class SetDoorActivity : AppCompatActivity() {
                 }
             }
         }
-        manager.addEvent(Constants.AUTO){
+        manager.addEvent(Constants.SOCKET_DOOR2_AUTO){
             CoroutineScope(Dispatchers.Main).launch {
                 cnt++;
                 if (cnt == 2) {
@@ -67,7 +68,7 @@ class SetDoorActivity : AppCompatActivity() {
                             Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
                                 .show()
                             startActivity(Intent(this@SetDoorActivity, MainActivity::class.java))
-                            finish()
+                            ActivityCompat.finishAffinity(this@SetDoorActivity)
                         } else {
                             Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
                                 .show()

@@ -22,7 +22,7 @@ class SetPlantTemp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(MyApp.pref.startDoor != "") {
+        if(MyApp.pref.pump != "") {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -42,10 +42,9 @@ class SetPlantTemp : AppCompatActivity() {
             observing()
 
             statusData.observe(this@SetPlantTemp){
-                if(statusData.value == 2){
+                if(statusData.value == 1){
                     Toast.makeText(this@SetPlantTemp, "값설정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     MyApp.pref.openerSetting = plantTemp.value.toString()
-                    MyApp.pref.openerSetting2 = plantTemp2.value.toString()
                     startActivity(Intent(this@SetPlantTemp, SetNameActivity::class.java))
                     finish()
                 }

@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="펌 시간 설정"
+            android:text="펌프시간 설정"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -62,7 +62,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@+id/set_pump_start_time_button"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
@@ -105,7 +105,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@+id/set_pump_end_time_button"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toTopOf="@+id/textView8" />
 

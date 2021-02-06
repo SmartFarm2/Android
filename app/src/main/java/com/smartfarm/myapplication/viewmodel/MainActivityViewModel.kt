@@ -194,37 +194,37 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
 
     internal fun setPump() {
         if (pump.value == false) {
-            manager.emit(Constants.SOCKET_PUMP, false)
-        } else if (pump.value == true) {
             manager.emit(Constants.SOCKET_PUMP, true)
+        } else if (pump.value == true) {
+            manager.emit(Constants.SOCKET_PUMP, false)
         }
     }
 
     internal fun setDoor() {
         if (door.value == Constants.CLOCK) {
-            manager.emit(Constants.SOCKET_DOOR, Constants.CLOCK)
-        } else if (door.value == Constants.UNCLOCK) {
             manager.emit(Constants.SOCKET_DOOR, Constants.UNCLOCK)
+        } else if (door.value == Constants.UNCLOCK) {
+            manager.emit(Constants.SOCKET_DOOR, Constants.CLOCK)
         }else {
-            manager.emit(Constants.SOCKET_DOOR, Constants.OFF)
+            manager.emit(Constants.SOCKET_DOOR, Constants.CLOCK)
         }
     }
 
     internal fun setDoor2() {
         if (door2.value == Constants.CLOCK) {
-            manager.emit(Constants.SOCKET_DOOR2, Constants.CLOCK)
-        } else if (door2.value == Constants.UNCLOCK) {
             manager.emit(Constants.SOCKET_DOOR2, Constants.UNCLOCK)
+        } else if (door2.value == Constants.UNCLOCK) {
+            manager.emit(Constants.SOCKET_DOOR2, Constants.CLOCK)
         }else {
-            manager.emit(Constants.SOCKET_DOOR2, Constants.OFF)
+            manager.emit(Constants.SOCKET_DOOR2, Constants.CLOCK)
         }
     }
 
     internal fun setVoltage() {
         if (voltage.value == false) {
-            manager.emit(Constants.SOCKET_VOLTAGE, false)
-        } else if (voltage.value == true) {
             manager.emit(Constants.SOCKET_VOLTAGE, true)
+        } else if (voltage.value == true) {
+            manager.emit(Constants.SOCKET_VOLTAGE, false)
         }
     }
 

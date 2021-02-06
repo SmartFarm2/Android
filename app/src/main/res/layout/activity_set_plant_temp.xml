@@ -81,58 +81,7 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/set_plant_temp_content2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="바깥 하우스 온도를 설정하세요."
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/set_plant_temp_title"
-            app:layout_constraintStart_toStartOf="@+id/set_plant_temp_title"
-            app:layout_constraintTop_toBottomOf="@+id/set_plant_temp_linear" />
 
-        <LinearLayout
-            android:id="@+id/set_plant_temp_linear2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/set_plant_temp_content2">
-
-            <EditText
-                android:id="@+id/set_plant_temp_value2"
-                android:layout_width="wrap_content"
-                android:layout_height="133dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:gravity="end"
-                android:hint="온도"
-                android:inputType="number"
-                android:maxLength="2"
-                android:maxLines="1"
-                android:text="@={myViewModel.plantTemp2}"
-                android:textColor="@color/black"
-                android:textColorHint="@color/exo_gray"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="°C"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/set_plant_temp_next"
