@@ -159,6 +159,13 @@
                         isOn="@{myViewModel.doorData}"
                         layout="@layout/layout_bottom_information" />
 
+                    <include
+                        android:id="@+id/voltage"
+                        name="@{`220V`}"
+                        img="@{@drawable/ic_light}"
+                        isOn="@{myViewModel.voltageData}"
+                        layout="@layout/layout_bottom_information" />
+
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>

@@ -34,6 +34,7 @@ object Constants {
     const val SOCKET_START_Light = "onTime"
     const val SOCKET_END_Light = "offTime"
     const val SOCKET_CCTV = ":8080/hls/stream.m3u8"
+    const val SOCKET_VOLTAGE = "volt"
     const val CCTV = "cctv"
 
 
