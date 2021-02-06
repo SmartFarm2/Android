@@ -159,6 +159,13 @@
                         isOn="@{myViewModel.doorData}"
                         layout="@layout/layout_bottom_information" />
 
+                    <include
+                        android:id="@+id/door2"
+                        name="@{`개폐기2`}"
+                        img="@{@drawable/ic_door}"
+                        isOn="@{myViewModel.doorData2}"
+                        layout="@layout/layout_bottom_information" />
+
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>

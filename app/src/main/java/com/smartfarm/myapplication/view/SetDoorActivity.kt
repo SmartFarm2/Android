@@ -21,6 +21,8 @@ class SetDoorActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySetDoorBinding
     private lateinit var manager: SocketManager
     private var check : Boolean? = null
+    private var check2 : Boolean? = null
+
     override fun onDestroy() {
         super.onDestroy()
         manager.removeEvent(Constants.AUTO)
@@ -57,8 +59,20 @@ class SetDoorActivity : AppCompatActivity() {
                 check = false
             }
 
+            autoDoor2.setOnClickListener{
+                autoDoor2.background = ContextCompat.getDrawable(this@SetDoorActivity, R.drawable.door_click_background)
+                manualDoor2.background = ContextCompat.getDrawable(this@SetDoorActivity, R.drawable.door_background)
+                check2 = true
+            }
+
+            manualDoor2.setOnClickListener {
+                manualDoor2.background = ContextCompat.getDrawable(this@SetDoorActivity, R.drawable.door_click_background)
+                autoDoor2.background = ContextCompat.getDrawable(this@SetDoorActivity, R.drawable.door_background)
+                check2 = false
+            }
+
             setDoorNext.setOnClickListener {
-                if(check == null) {
+                if(check == null && check2 == null) {
                     Toast.makeText(this@SetDoorActivity, "자동과 수동중 선택해주세요.", Toast.LENGTH_SHORT).show()
                 }else {
                     manager.emit(Constants.AUTO, check!!)

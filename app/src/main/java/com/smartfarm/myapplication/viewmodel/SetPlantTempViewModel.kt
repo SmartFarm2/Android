@@ -17,6 +17,7 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     private var manager : SocketManager = SocketManager.getInstance(application)
 
     var plantTemp = MutableLiveData<String>()
+    var plantTemp2 = MutableLiveData<String>()
 
     private var _toasts = MutableLiveData<Event<String>>()
     val toasts : LiveData<Event<String>>
@@ -43,7 +44,7 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     }
 
     fun setTemp(){
-        if(plantTemp.value.isNullOrBlank()) {
+        if(plantTemp.value.isNullOrBlank() && plantTemp2.value.isNullOrBlank()) {
             _toasts.value = Event("온도값을 설정해 주십시오.")
         }
         else{
