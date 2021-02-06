@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SetLightActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySetLightBinding
+    private lateinit var binding: ActivitySetLightBinding
     private lateinit var manager: SocketManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,33 +27,51 @@ class SetLightActivity : AppCompatActivity() {
 
         Log.d("TAG", "생겨남")
 
-        manager.addEvent(Constants.SOCKET_START_DOOR){
+        manager.addEvent(Constants.SOCKET_START_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
-                if(it[0] == binding.setLightStartHour.text.toString().toInt() * 100) {
-                    if (MyApp.pref.startLight == ""){
+                if (it[0] == binding.setLightStartHour.text.toString().toInt() * 100) {
+                    if (MyApp.pref.startLight == "") {
                         startActivity(Intent(this@SetLightActivity, SetPumpActivity::class.java))
                         finish()
-                    }else{
+                    } else {
                         finish()
                     }
-                    MyApp.pref.startLight = (binding.setLightStartHour.text.toString().toInt() * 100).toString()
-                    MyApp.pref.endLight = (binding.setLightEndHour.text.toString().toInt() * 100).toString()
+                    MyApp.pref.startLight =
+                        (binding.setLightStartHour.text.toString().toInt() * 100).toString()
+                    MyApp.pref.endLight =
+                        (binding.setLightEndHour.text.toString().toInt() * 100).toString()
                     Toast.makeText(this@SetLightActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
 
                     Log.d("TAG", "사라짐")
-                }else{
-                    Toast.makeText(this@SetLightActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@SetLightActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
 
         with(binding) {
             setLightNext.setOnClickListener {
-                if(!setLightStartHour.text.isNullOrEmpty() && !setLightEndHour.text.isNullOrEmpty() && setLightStartHour.text.toString().toInt() < 24 && setLightEndHour.text.toString().toInt() < 24) {
-                    manager.emit(Constants.SOCKET_START_Light, setLightStartHour.text.toString().toInt() * 100)
-                    manager.emit(Constants.SOCKET_END_Light, setLightEndHour.text.toString().toInt() * 100)
-                }else{
-                    Toast.makeText(applicationContext, "올바른 시간을 설정해 주십시오", Toast.LENGTH_SHORT).show()
+                if (!setLightStartHour.text.isNullOrEmpty()
+                    && !setLightEndHour.text.isNullOrEmpty()
+                    && setLightStartHour.text.toString().toInt() < 24
+                    && setLightEndHour.text.toString().toInt() < 24
+                    &&!setLightStartHour2.text.isNullOrEmpty()
+                    && !setLightEndHour2.text.isNullOrEmpty()
+                    && setLightStartHour2.text.toString().toInt() < 24
+                    && setLightEndHour2.text.toString().toInt() < 24
+                ) {
+                    manager.emit(Constants.SOCKET_START_Light,
+                        setLightStartHour.text.toString().toInt() * 100)
+                    manager.emit(Constants.SOCKET_END_Light,
+                        setLightEndHour.text.toString().toInt() * 100)
+                    manager.emit(Constants.SOCKET_START_Light2,
+                        setLightStartHour2.text.toString().toInt() * 100)
+                    manager.emit(Constants.SOCKET_END_Light2,
+                        setLightEndHour2.text.toString().toInt() * 100)
+                } else {
+                    Toast.makeText(applicationContext, "올바른 시간을 설정해 주십시오", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
@@ -64,6 +82,8 @@ class SetLightActivity : AppCompatActivity() {
     override fun onDestroy() {
         manager.removeEvent(Constants.SOCKET_START_Light)
         manager.removeEvent(Constants.SOCKET_END_Light)
+        manager.removeEvent(Constants.SOCKET_START_Light2)
+        manager.removeEvent(Constants.SOCKET_END_Light2)
         super.onDestroy()
     }
 }
