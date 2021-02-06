@@ -34,24 +34,50 @@ class SetDoorActivity : AppCompatActivity() {
         manager = SocketManager.getInstance(application)
 
         var isFirst = intent.getStringExtra("door")
-
+        var cnt = 0;
         manager.addEvent(Constants.AUTO){
             CoroutineScope(Dispatchers.Main).launch {
-                if(it[0] == check) {
-                    if(isFirst == "door") {
-                        Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
+                cnt++;
+                if (cnt == 2) {
+                    if (it[0] == check) {
+                        if (isFirst == "door") {
+                            Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
+                                .show()
+                            startActivity(Intent(this@SetDoorActivity, MainActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
+                                .show()
+                            startActivity(Intent(this@SetDoorActivity, SetVoltActivity::class.java))
+                            finish()
+                        }
+                    } else {
+                        Toast.makeText(this@SetDoorActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT)
                             .show()
-                        startActivity(Intent(this@SetDoorActivity, MainActivity::class.java))
-                        finish()
                     }
-                    else {
-                        Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
+                }
+            }
+        }
+        manager.addEvent(Constants.AUTO){
+            CoroutineScope(Dispatchers.Main).launch {
+                cnt++;
+                if (cnt == 2) {
+                    if (it[0] == check) {
+                        if (isFirst == "door") {
+                            Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
+                                .show()
+                            startActivity(Intent(this@SetDoorActivity, MainActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
+                                .show()
+                            startActivity(Intent(this@SetDoorActivity, SetVoltActivity::class.java))
+                            finish()
+                        }
+                    } else {
+                        Toast.makeText(this@SetDoorActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT)
                             .show()
-                        startActivity(Intent(this@SetDoorActivity, SetVoltActivity::class.java))
-                        finish()
                     }
-                }else{
-                    Toast.makeText(this@SetDoorActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -87,6 +113,7 @@ class SetDoorActivity : AppCompatActivity() {
                     Toast.makeText(this@SetDoorActivity, "자동과 수동중 선택해주세요.", Toast.LENGTH_SHORT).show()
                 }else {
                     manager.emit(Constants.AUTO, check!!)
+                    manager.emit(Constants.SOCKET_DOOR2_AUTO, check2!!)
                 }
             }
         }
