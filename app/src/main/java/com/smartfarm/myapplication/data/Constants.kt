@@ -10,6 +10,7 @@ object Constants {
     const val SERVER_DATA_KEY = "SERVER_ADDRESS_KEY"
     const val PASSWORD_DATA_KEY = "PASSWORD_KEY"
     const val OPENER_DATA_KEY = "OPENER_EKY"
+    const val OPENER_DATA_KEY2 = "OPENER_EKY2"
     const val NAME_DATA_KEY = "name"
     const val LAST_CHECK_NOTI_KEY = "noti"
     const val DOOR_SET_KEY = "DOOR_SET_KEY"

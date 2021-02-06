@@ -23,13 +23,14 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     val toasts : LiveData<Event<String>>
         get() = _toasts
 
-    private var status = MutableLiveData<String>()
-    val statusData : LiveData<String>
+    private var status = MutableLiveData<Int>()
+    val statusData : LiveData<Int>
         get() = status
 
-    private var status2 = MutableLiveData<String>()
-    val statusData2 : LiveData<String>
-        get() = status2
+
+    init {
+        status.value = 0
+    }
 
     fun observing() {
         getSetTempState()
@@ -43,13 +44,13 @@ class SetPlantTempViewModel(application: Application) : ViewModel() {
     private fun getSetTempState(){
         manager.addEvent(Constants.SOCKET_SET_TEMP) {
             CoroutineScope(Dispatchers.Main).launch {
-                status.value = it[0] as String
+                status.value = status.value?.plus(1)
             }
         }
 
         manager.addEvent(Constants.SOCKET_SET_TEMP2) {
             CoroutineScope(Dispatchers.Main).launch {
-                status2.value = it[0] as String
+                status.value = status.value?.plus(1)
             }
         }
     }

@@ -42,13 +42,12 @@ class SetPlantTemp : AppCompatActivity() {
             observing()
 
             statusData.observe(this@SetPlantTemp){
-                if(!statusData.value.isNullOrEmpty()){
+                if(statusData.value == 2){
                     Toast.makeText(this@SetPlantTemp, "값설정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                    MyApp.pref.openerSetting = it
+                    MyApp.pref.openerSetting = plantTemp.value.toString()
+                    MyApp.pref.openerSetting2 = plantTemp2.value.toString()
                     startActivity(Intent(this@SetPlantTemp, SetNameActivity::class.java))
                     finish()
-                }else{
-                    Toast.makeText(this@SetPlantTemp, "관리자에게 문의하시오..", Toast.LENGTH_SHORT).show()
                 }
             }
 

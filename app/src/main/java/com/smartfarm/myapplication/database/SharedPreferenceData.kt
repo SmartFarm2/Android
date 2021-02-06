@@ -18,6 +18,9 @@ class SharedPreferenceData(context: Context) {
     var openerSetting: String
         get() = pref.getString(Constants.OPENER_DATA_KEY, "")!!
         set(value) = pref.edit().putString(Constants.OPENER_DATA_KEY, value).apply()
+    var openerSetting2: String
+        get() = pref.getString(Constants.OPENER_DATA_KEY2, "")!!
+        set(value) = pref.edit().putString(Constants.OPENER_DATA_KEY2, value).apply()
     var name: String
         get() = pref.getString(Constants.NAME_DATA_KEY, "")!!
         set(value) = pref.edit().putString(Constants.NAME_DATA_KEY, value).apply()
