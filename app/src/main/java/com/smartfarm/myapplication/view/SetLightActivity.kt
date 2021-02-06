@@ -56,19 +56,19 @@ class SetLightActivity : AppCompatActivity() {
                     && !setLightEndHour.text.isNullOrEmpty()
                     && setLightStartHour.text.toString().toInt() < 24
                     && setLightEndHour.text.toString().toInt() < 24
-                    &&!setLightStartHour2.text.isNullOrEmpty()
-                    && !setLightEndHour2.text.isNullOrEmpty()
-                    && setLightStartHour2.text.toString().toInt() < 24
-                    && setLightEndHour2.text.toString().toInt() < 24
+                    &&!setLightStartVoltage.text.isNullOrEmpty()
+                    && !setLightEndVoltage.text.isNullOrEmpty()
+                    && setLightStartVoltage.text.toString().toInt() < 24
+                    && setLightEndVoltage.text.toString().toInt() < 24
                 ) {
                     manager.emit(Constants.SOCKET_START_Light,
                         setLightStartHour.text.toString().toInt() * 100)
                     manager.emit(Constants.SOCKET_END_Light,
                         setLightEndHour.text.toString().toInt() * 100)
-                    manager.emit(Constants.SOCKET_START_Light2,
-                        setLightStartHour2.text.toString().toInt() * 100)
-                    manager.emit(Constants.SOCKET_END_Light2,
-                        setLightEndHour2.text.toString().toInt() * 100)
+                    manager.emit(Constants.SOCKET_START_Voltage,
+                        setLightStartVoltage.text.toString().toInt() * 100)
+                    manager.emit(Constants.SOCKET_END_Voltage,
+                        setLightEndVoltage.text.toString().toInt() * 100)
                 } else {
                     Toast.makeText(applicationContext, "올바른 시간을 설정해 주십시오", Toast.LENGTH_SHORT)
                         .show()
@@ -82,8 +82,8 @@ class SetLightActivity : AppCompatActivity() {
     override fun onDestroy() {
         manager.removeEvent(Constants.SOCKET_START_Light)
         manager.removeEvent(Constants.SOCKET_END_Light)
-        manager.removeEvent(Constants.SOCKET_START_Light2)
-        manager.removeEvent(Constants.SOCKET_END_Light2)
+        manager.removeEvent(Constants.SOCKET_START_Voltage)
+        manager.removeEvent(Constants.SOCKET_END_Voltage)
         super.onDestroy()
     }
 }

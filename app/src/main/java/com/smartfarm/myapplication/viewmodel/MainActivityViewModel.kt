@@ -177,9 +177,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private fun getLight() {
         manager.addEvent(Constants.SOCKET_LIGHT) {
             CoroutineScope(Dispatchers.Main).launch {
-                Log.d("door2", it[0].toString())
                 light.value = it[0] as Boolean
-                Log.d("door", "data: ${door.value}")
             }
         }
     }
@@ -187,9 +185,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private fun getPump() {
         manager.addEvent(Constants.SOCKET_PUMP) {
             CoroutineScope(Dispatchers.Main).launch {
-                Log.d("door2", it[0].toString())
                 pump.value = it[0] as Boolean
-                Log.d("door", "data: ${door.value}")
             }
         }
     }
