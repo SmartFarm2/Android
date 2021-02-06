@@ -47,6 +47,10 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val doorData: LiveData<Boolean>
         get() = door
 
+    private var door2 = MutableLiveData<Boolean>()
+    val doorData2: LiveData<Boolean>
+        get() = door2
+
     private var _toasts = MutableLiveData<Event<String>>()
     val toasts: LiveData<Event<String>>
         get() = _toasts
