@@ -47,12 +47,12 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val cycleData: LiveData<Boolean>
         get() = cycle
 
-    private var door = MutableLiveData<Boolean>()
-    val doorData: LiveData<Boolean>
+    private var door = MutableLiveData<Int>()
+    val doorData: LiveData<Int>
         get() = door
 
-    private var door2 = MutableLiveData<Boolean>()
-    val doorData2: LiveData<Boolean>
+    private var door2 = MutableLiveData<Int>()
+    val doorData2: LiveData<Int>
         get() = door2
 
     private var _toasts = MutableLiveData<Event<String>>()
@@ -80,7 +80,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         insideTemp.value = startingTemp
         insideHum.value = startingTemp
         cycle.value = true
-        door.value = true
+        door.value = 0
         weather.value = "맑음"
 
         weatherService = retrofit.create(RetrofitService::class.java)
@@ -165,7 +165,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private fun getDoor() {
         manager.addEvent(Constants.SOCKET_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
-                door.value = it[0] as Boolean
+                door.value = it[0] as Int
             }
         }
     }
@@ -173,7 +173,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     private fun getDoor2() {
         manager.addEvent(Constants.SOCKET_DOOR2) {
             CoroutineScope(Dispatchers.Main).launch {
-                door2.value = it[0] as Boolean
+                door2.value = it[0] as Int
             }
         }
     }
@@ -193,26 +193,30 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
 
 
     internal fun setPump() {
-        if (door.value == false) {
+        if (pump.value == false) {
             manager.emit(Constants.SOCKET_PUMP, false)
-        } else if (door.value == true) {
+        } else if (pump.value == true) {
             manager.emit(Constants.SOCKET_PUMP, true)
         }
     }
 
     internal fun setDoor() {
-        if (door.value == false) {
-            manager.emit(Constants.SOCKET_DOOR, false)
-        } else if (door.value == true) {
-            manager.emit(Constants.SOCKET_DOOR, true)
+        if (door.value == Constants.CLOCK) {
+            manager.emit(Constants.SOCKET_DOOR, Constants.CLOCK)
+        } else if (door.value == Constants.UNCLOCK) {
+            manager.emit(Constants.SOCKET_DOOR, Constants.UNCLOCK)
+        }else {
+            manager.emit(Constants.SOCKET_DOOR, Constants.OFF)
         }
     }
 
     internal fun setDoor2() {
-        if (door.value == false) {
-            manager.emit(Constants.SOCKET_DOOR, false)
-        } else if (door.value == true) {
-            manager.emit(Constants.SOCKET_DOOR, true)
+        if (door2.value == Constants.CLOCK) {
+            manager.emit(Constants.SOCKET_DOOR2, Constants.CLOCK)
+        } else if (door2.value == Constants.UNCLOCK) {
+            manager.emit(Constants.SOCKET_DOOR2, Constants.UNCLOCK)
+        }else {
+            manager.emit(Constants.SOCKET_DOOR2, Constants.OFF)
         }
     }
 

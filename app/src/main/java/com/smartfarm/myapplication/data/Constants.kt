@@ -7,6 +7,10 @@ object Constants {
     const val channelName = "SERVER SOCKET"
     const val channelDescription = "서버와 연결하기위한 서비스 입니다."
 
+    const val CLOCK = 2
+    const val UNCLOCK = 1
+    const val OFF = 0
+
     const val SERVER_DATA_KEY = "SERVER_ADDRESS_KEY"
     const val PASSWORD_DATA_KEY = "PASSWORD_KEY"
     const val OPENER_DATA_KEY = "OPENER_EKY"
@@ -19,7 +23,7 @@ object Constants {
     const val START_VOLTAGE_KEY = "START_DOOR_KEY"
     const val END_VOLTAGE_KEY = "END_DOOR_KEY"
     const val INIT = "init"
-    const val AUTO = "setAuto"
+    const val AUTO = "setFirstAuto"
 
     const val SERVER_ADDRESS = "DEFAULT_ADDRESS"
     const val SOCKET_TEMP = "temp"
@@ -28,21 +32,22 @@ object Constants {
     const val SOCKET_HUMI = "humi"
     const val SOCKET_CYCLE = "cycle"
     const val SOCKET_SET_TEMP = "setTemp"
-    const val SOCKET_SET_TEMP2 = "setTemp2"
-    const val SOCKET_CYCLE_CHANGE = "changeCycle"
-    const val SOCKET_DOOR = "door"
-    const val SOCKET_DOOR2 = "door2"
+    const val SOCKET_SET_TEMP2 = "setTemp2" // UNUSED
+    const val SOCKET_CYCLE_CHANGE = "changeCycle" //
+    const val SOCKET_DOOR = "first_door"
+    const val SOCKET_DOOR2 = "second_door"
+    const val SOCKET_DOOR2_AUTO = "setSecondAuto"
     const val SOCKET_START_DOOR = "onTime"
     const val SOCKET_END_DOOR = "offTime"
     const val SOCKET_START_VOLTAGE = "vontime"
     const val SOCKET_END_VOLTAGE = "vofftime"
     const val SOCKET_START_PUMP = "montime"
     const val SOCKET_END_PUMP = "mofftime"
-    const val SOCKET_PUMP = "m"
-    const val SOCKET_PUMP_AUTO = "m"
+    const val SOCKET_PUMP = "multitab"
+    const val SOCKET_PUMP_AUTO = "setMultitab"
     const val SOCKET_CCTV = ":8080/hls/stream.m3u8"
-    const val SOCKET_VOLTAGE = "volt"
-    const val SOCKET_VOLTAGE_AUTO = "voltAuto"
+    const val SOCKET_VOLTAGE = "voltage24"
+    const val SOCKET_VOLTAGE_AUTO = "setVoltage24"
     const val CCTV = "cctv"
 
 
