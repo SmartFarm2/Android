@@ -71,6 +71,30 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
     val voltageData: LiveData<Boolean>
         get() = voltage
 
+    private var voltage220 = MutableLiveData<Boolean>()
+    val voltageData220: LiveData<Boolean>
+        get() = voltage220
+
+    private var pumpAuto = MutableLiveData<Boolean>()
+    val pumpAutoData: LiveData<Boolean>
+        get() = pumpAuto
+
+    private var doorAuto1 = MutableLiveData<Boolean>()
+    val doorAutoData1: LiveData<Boolean>
+        get() = doorAuto1
+
+    private var doorAuto2 = MutableLiveData<Boolean>()
+    val doorAutoData2: LiveData<Boolean>
+        get() = doorAuto2
+
+    private var auto24 = MutableLiveData<Boolean>()
+    val auto24Data: LiveData<Boolean>
+        get() = auto24
+
+    private var auto220 = MutableLiveData<Boolean>()
+    val auto220Data: LiveData<Boolean>
+        get() = auto220
+
     private val retrofit: Retrofit = RetrofitClient.getInstance()
     private var weatherService: RetrofitService
 
@@ -99,6 +123,8 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         getInsideHumi()
         getVoltage()
         getPump()
+        get220Voltage()
+        getIsAuto()
     }
 
     fun deobserving() {
@@ -110,12 +136,54 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         manager.removeEvent(Constants.SOCKET_TEMP_INSIDE)
         manager.removeEvent(Constants.SOCKET_HUMI_INSIDE)
         manager.removeEvent(Constants.SOCKET_VOLTAGE)
+        manager.removeEvent(Constants.SOCKET_220VOLTAGE)
+        manager.removeEvent(Constants.SOCKET_220VOLTAGE_AUTO)
+        manager.removeEvent(Constants.SOCKET_DOOR2_AUTO)
+        manager.removeEvent(Constants.SOCKET_PUMP_AUTO)
+        manager.removeEvent(Constants.SOCKET_VOLTAGE_AUTO)
+        manager.removeEvent(Constants.AUTO)
     }
 
     private fun getVoltage() {
         manager.addEvent(Constants.SOCKET_VOLTAGE) {
             CoroutineScope(Dispatchers.Main).launch {
                 voltage.value = it[0] as Boolean
+            }
+        }
+    }
+
+    private fun getIsAuto() {
+        manager.addEvent(Constants.SOCKET_PUMP_AUTO) {
+            CoroutineScope(Dispatchers.Main).launch {
+                pumpAuto.value = it[0] as Boolean
+            }
+        }
+        manager.addEvent(Constants.AUTO) {
+            CoroutineScope(Dispatchers.Main).launch {
+                doorAuto1.value = it[0] as Boolean
+            }
+        }
+        manager.addEvent(Constants.SOCKET_DOOR2_AUTO) {
+            CoroutineScope(Dispatchers.Main).launch {
+                doorAuto2.value = it[0] as Boolean
+            }
+        }
+        manager.addEvent(Constants.SOCKET_VOLTAGE_AUTO) {
+            CoroutineScope(Dispatchers.Main).launch {
+                auto24.value = it[0] as Boolean
+            }
+        }
+        manager.addEvent(Constants.SOCKET_220VOLTAGE_AUTO) {
+            CoroutineScope(Dispatchers.Main).launch {
+                auto220.value = it[0] as Boolean
+            }
+        }
+    }
+
+    private fun get220Voltage() {
+        manager.addEvent(Constants.SOCKET_220VOLTAGE) {
+            CoroutineScope(Dispatchers.Main).launch {
+                voltage220.value = it[0] as Boolean
             }
         }
     }
@@ -186,12 +254,6 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
         }
     }
 
-    internal fun setCycle() {
-        manager.emit(Constants.SOCKET_CYCLE_CHANGE, cycle.value!!.not())
-        cycle.value = cycle.value?.not()
-    }
-
-
     internal fun setPump() {
         if (pump.value == false) {
             manager.emit(Constants.SOCKET_PUMP, true)
@@ -205,7 +267,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
             manager.emit(Constants.SOCKET_DOOR, Constants.UNCLOCK)
         } else if (door.value == Constants.UNCLOCK) {
             manager.emit(Constants.SOCKET_DOOR, Constants.CLOCK)
-        }else {
+        } else {
             manager.emit(Constants.SOCKET_DOOR, Constants.CLOCK)
         }
     }
@@ -215,7 +277,7 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
             manager.emit(Constants.SOCKET_DOOR2, Constants.UNCLOCK)
         } else if (door2.value == Constants.UNCLOCK) {
             manager.emit(Constants.SOCKET_DOOR2, Constants.CLOCK)
-        }else {
+        } else {
             manager.emit(Constants.SOCKET_DOOR2, Constants.CLOCK)
         }
     }
@@ -225,6 +287,14 @@ class MainActivityViewModel(startingTemp: Int, application: Application) : ViewM
             manager.emit(Constants.SOCKET_VOLTAGE, true)
         } else if (voltage.value == true) {
             manager.emit(Constants.SOCKET_VOLTAGE, false)
+        }
+    }
+
+    internal fun set220Voltage() {
+        if (voltage220.value == false) {
+            manager.emit(Constants.SOCKET_220VOLTAGE, true)
+        } else if (voltage220.value == true) {
+            manager.emit(Constants.SOCKET_220VOLTAGE, false)
         }
     }
 

@@ -3,6 +3,7 @@ package com.smartfarm.myapplication.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -40,7 +41,7 @@ class SetDoorActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 cnt++;
                 if (cnt == 2) {
-                    if (it[0] == check) {
+                    if (it[0] == check || it[0] == check2) {
                         if (isFirst == "door") {
                             Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
                                 .show()
@@ -55,6 +56,7 @@ class SetDoorActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this@SetDoorActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT)
                             .show()
+                        Log.d("door1234", "dat: ${it[0]}")
                     }
                 }
             }
@@ -63,7 +65,7 @@ class SetDoorActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 cnt++;
                 if (cnt == 2) {
-                    if (it[0] == check) {
+                    if (it[0] == check || it[0] == check2) {
                         if (isFirst == "door") {
                             Toast.makeText(this@SetDoorActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT)
                                 .show()
@@ -78,6 +80,7 @@ class SetDoorActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this@SetDoorActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT)
                             .show()
+                        Log.d("door1234", "dat: ${it[0]}")
                     }
                 }
             }

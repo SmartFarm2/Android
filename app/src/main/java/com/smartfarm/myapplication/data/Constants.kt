@@ -23,6 +23,8 @@ object Constants {
     const val END_DOOR_KEY = "END_DOOR_KEY"
     const val START_VOLTAGE_KEY = "START_DOOR_KEY"
     const val END_VOLTAGE_KEY = "END_DOOR_KEY"
+    const val START_220VOLTAGE_KEY = "START_220DOOR_KEY"
+    const val END_220VOLTAGE_KEY = "END_220DOOR_KEY"
     const val INIT = "init"
     const val AUTO = "setFirstAuto"
 
@@ -42,6 +44,8 @@ object Constants {
     const val SOCKET_END_DOOR = "offTime"
     const val SOCKET_START_VOLTAGE = "vontime"
     const val SOCKET_END_VOLTAGE = "vofftime"
+    const val SOCKET_START_220VOLTAGE = "m2ontime"
+    const val SOCKET_END_220VOLTAGE = "m2offtime"
     const val SOCKET_START_PUMP = "montime"
     const val SOCKET_END_PUMP = "mofftime"
     const val SOCKET_PUMP = "multitab"
@@ -49,6 +53,8 @@ object Constants {
     const val SOCKET_CCTV = ":8080/hls/stream.m3u8"
     const val SOCKET_VOLTAGE = "voltage24"
     const val SOCKET_VOLTAGE_AUTO = "setVoltage24"
+    const val SOCKET_220VOLTAGE = "voltage220"
+    const val SOCKET_220VOLTAGE_AUTO = "setVoltage220"
     const val CCTV = "cctv"
 
 
@@ -58,7 +64,7 @@ object Constants {
     const val DISCONNECTED_KEY = "DISCONNECTED"
     const val CONNECTING_KEY = "CONNECTING"
 
-    const val WEATHER_URL = "/weather"
+    const val WEATHER_URL = ":8080/weather"
 
     const val NAME_VERIFY_KEY = "SUCCESS"
 }

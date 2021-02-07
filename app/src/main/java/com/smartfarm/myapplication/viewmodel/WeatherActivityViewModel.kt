@@ -31,10 +31,9 @@ class WeatherActivityViewModel(application: Application) : ViewModel() {
         get() = _toasts
 
     private val retrofit: Retrofit = RetrofitClient.getInstance()
-    private var weatherService: RetrofitService
+    private var weatherService: RetrofitService = retrofit.create(RetrofitService::class.java)
 
     init {
-        weatherService = retrofit.create(RetrofitService::class.java)
 
         weather.value = "맑음"
     }

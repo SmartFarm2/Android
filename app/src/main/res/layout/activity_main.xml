@@ -134,21 +134,16 @@
 
                     <include
                         android:id="@+id/pump"
+                        isAuto="@{myViewModel.pumpAutoData}"
                         name="@{`펌프`}"
                         img="@{@drawable/ic_pump}"
                         isOn="@{myViewModel.pumpData}"
                         layout="@layout/layout_bottom_information" />
 
                     <include
-                        android:id="@+id/cycle"
-                        name="@{`환기팬`}"
-                        img="@{@drawable/ic_fan}"
-                        isOn="@{myViewModel.cycleData}"
-                        layout="@layout/layout_bottom_information" />
-
-                    <include
                         android:id="@+id/door"
                         name="@{`개폐기`}"
+                        isAuto="@{myViewModel.doorAutoData1}"
                         img="@{@drawable/ic_door}"
                         isOn="@{myViewModel.doorData == 2}"
                         layout="@layout/layout_bottom_information" />
@@ -156,6 +151,7 @@
                     <include
                         android:id="@+id/door2"
                         name="@{`개폐기2`}"
+                        isAuto="@{myViewModel.doorAutoData2}"
                         img="@{@drawable/ic_door}"
                         isOn="@{myViewModel.doorData2 == 2}"
                         layout="@layout/layout_bottom_information" />
@@ -163,8 +159,17 @@
                     <include
                         android:id="@+id/voltage"
                         name="@{`24V`}"
+                        isAuto="@{myViewModel.auto24Data}"
                         img="@{@drawable/ic_volt}"
                         isOn="@{myViewModel.voltageData}"
+                        layout="@layout/layout_bottom_information"/>
+
+                    <include
+                        android:id="@+id/voltage220"
+                        name="@{`220V`}"
+                        img="@{@drawable/ic_volt}"
+                        isAuto="@{myViewModel.auto220Data}"
+                        isOn="@{myViewModel.voltageData220}"
                         layout="@layout/layout_bottom_information"/>
 
                 </LinearLayout>

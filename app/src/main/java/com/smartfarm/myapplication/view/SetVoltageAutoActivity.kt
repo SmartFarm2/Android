@@ -3,6 +3,7 @@ package com.smartfarm.myapplication.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -32,6 +33,7 @@ class SetVoltageAutoActivity : AppCompatActivity() {
 
         manager.addEvent(Constants.SOCKET_VOLTAGE_AUTO){
             CoroutineScope(Dispatchers.Main).launch {
+                Log.d("holy", "data")
                 if(it[0] == check) {
                     if(isFirst == "volt") {
                         Toast.makeText(this@SetVoltageAutoActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
@@ -39,7 +41,7 @@ class SetVoltageAutoActivity : AppCompatActivity() {
                         ActivityCompat.finishAffinity(this@SetVoltageAutoActivity)
                     }else{
                         Toast.makeText(this@SetVoltageAutoActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@SetVoltageAutoActivity, SetPumpActivity::class.java))
+                        startActivity(Intent(this@SetVoltageAutoActivity, Set220Activity::class.java))
                         finish()
                     }
                 }else{
@@ -66,6 +68,9 @@ class SetVoltageAutoActivity : AppCompatActivity() {
                 if(check == null) {
                     Toast.makeText(this@SetVoltageAutoActivity, "자동과 수동중 선택해주세요.", Toast.LENGTH_SHORT).show()
                 }else {
+                    Log.d("holy", "data2")
+                    Log.d("holy", "data: $check")
+
                     manager.emit(Constants.SOCKET_VOLTAGE_AUTO, check!!)
                 }
             }

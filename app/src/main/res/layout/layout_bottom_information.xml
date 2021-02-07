@@ -13,6 +13,10 @@
         <variable
             name="isOn"
             type="Boolean" />
+
+        <variable
+            name="isAuto"
+            type="Boolean" />
     </data>
 
     <LinearLayout
@@ -48,12 +52,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:text="@{isAuto ? `자동` : `수동`}"
+            android:isBold="@{true}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            tools:text="수동"
+            tools:textColor="@color/black"/>
+
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:src="@{isOn ? @drawable/state_circle : @drawable/error_state}"
             tools:src="@drawable/state_circle"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

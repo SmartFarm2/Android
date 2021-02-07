@@ -46,10 +46,6 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
             recycler.adapter = SpecialAdapter()
 
-            cycle.infoBox.setOnClickListener {
-                viewModel.setCycle()
-            }
-
             door.infoBox.setOnClickListener {
                 viewModel.setDoor()
             }
@@ -81,6 +77,10 @@ class MainActivity : AppCompatActivity() {
 
             pump.infoBox.setOnClickListener {
                 viewModel.setPump()
+            }
+
+            voltage220.infoBox.setOnClickListener {
+                viewModel.set220Voltage()
             }
         }
 

@@ -27,6 +27,8 @@
         <activity android:name=".view.SetDoorActivity" />
         <activity android:name=".view.NotiBoxActivity" />
         <activity android:name=".view.WeatherActivity" />
+        <activity android:name=".view.Set220Activity"/>
+        <activity android:name=".view.Set220AutoActivity"/>
         <activity
             android:name=".view.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -39,7 +41,6 @@
         <activity android:name=".view.SetNameActivity" />
         <activity android:name=".view.SetPlantTemp" />
         <activity android:name=".view.QrScanActivity" />
-        <activity android:name=".view.SignActivity" />
         <activity
             android:name=".view.QrActivity"
             android:windowSoftInputMode="adjustResize" />

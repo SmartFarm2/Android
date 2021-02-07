@@ -40,6 +40,7 @@
     <string name="door_set">개폐기 재설정</string>
     <string name="pump_set">펌프 재설정</string>
     <string name="voltage_set">24v 재설정</string>
+    <string name="voltage220_set">220v 재설정</string>
     <string name="setting_title">설정</string>
     <string name="farm_Data">농장 설정</string>
     <string name="door_state_setting">농장 자동/수동 재설정</string>

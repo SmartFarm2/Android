@@ -34,6 +34,11 @@ class SettingActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.voltage220TimeSetting.setOnClickListener {
+            startActivity(Intent(this, Set220Activity::class.java).putExtra("volt220", "volt220"))
+            finish()
+        }
+
     }
 
 }
