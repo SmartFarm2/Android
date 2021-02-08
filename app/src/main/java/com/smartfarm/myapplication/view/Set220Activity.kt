@@ -28,20 +28,29 @@ class Set220Activity : AppCompatActivity() {
 
         Log.d("TAG", "생겨남")
 
-        var isFirst = intent.getStringExtra("volt220")
+        val isFirst = intent.getStringExtra("volt220")
 
         manager.addEvent(Constants.SOCKET_START_220VOLTAGE) {
             CoroutineScope(Dispatchers.Main).launch {
                 Log.d("TAG", "성고23")
 
                 Log.d("TAG", "${it[0]}")
-                if (it[0] == binding.setVoltStartVoltage.text.toString().toInt() * 100) {
+                if (it[0] == ((binding.setVoltStartVoltage.text.toString()
+                        .toInt() * 100) + binding.setVoltStartVoltageMin.text.toString().toInt())
+                ) {
                     MyApp.pref.start220Voltage =
-                        (binding.setVoltStartVoltage.text.toString().toInt() * 100).toString()
+                        ((binding.setVoltStartVoltage.text.toString()
+                            .toInt() * 100) + binding.setVoltStartVoltageMin.text.toString().toInt()).toString()
                     MyApp.pref.end220Voltage =
-                        (binding.setVoltEndVoltage.text.toString().toInt() * 100).toString()
+                        ((binding.setVoltEndVoltage.text.toString()
+                            .toInt() * 100) + binding.setVoltEndVoltageMin.text.toString().toInt()).toString()
                     Toast.makeText(this@Set220Activity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@Set220Activity, Set220AutoActivity::class.java).putExtra("volt220", isFirst))
+                    startActivity(
+                        Intent(
+                            this@Set220Activity,
+                            Set220AutoActivity::class.java
+                        ).putExtra("volt220", isFirst)
+                    )
 
                     finish()
                     Log.d("TAG", "사라짐")
@@ -58,12 +67,22 @@ class Set220Activity : AppCompatActivity() {
                     && !setVoltEndVoltage.text.isNullOrEmpty()
                     && setVoltStartVoltage.text.toString().toInt() < 24
                     && setVoltEndVoltage.text.toString().toInt() < 24
+                    && !setVoltStartVoltageMin.text.isNullOrEmpty()
+                    && !setVoltEndVoltageMin.text.isNullOrEmpty()
+                    && setVoltStartVoltageMin.text.toString().toInt() < 60
+                    && setVoltEndVoltageMin.text.toString().toInt() < 60
                 ) {
                     Log.d("TAG", "성고233")
-                    manager.emit(Constants.SOCKET_START_220VOLTAGE,
-                        setVoltStartVoltage.text.toString().toInt() * 100)
-                    manager.emit(Constants.SOCKET_END_220VOLTAGE,
-                        setVoltEndVoltage.text.toString().toInt() * 100)
+                    manager.emit(
+                        Constants.SOCKET_START_220VOLTAGE,
+                        ((setVoltStartVoltage.text.toString()
+                            .toInt() * 100) + setVoltStartVoltageMin.text.toString().toInt())
+                    )
+                    manager.emit(
+                        Constants.SOCKET_END_220VOLTAGE,
+                        ((setVoltEndVoltage.text.toString()
+                            .toInt() * 100) + setVoltEndVoltageMin.text.toString().toInt())
+                    )
                 } else {
                     Toast.makeText(applicationContext, "올바른 시간을 설정해 주십시오", Toast.LENGTH_SHORT)
                         .show()

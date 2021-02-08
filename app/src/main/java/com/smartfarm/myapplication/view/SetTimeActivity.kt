@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class SetTimeActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivitySetTimeBinding
+    private lateinit var binding: ActivitySetTimeBinding
     private lateinit var manager: SocketManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,16 +30,29 @@ class SetTimeActivity : AppCompatActivity() {
 
         var isFirst = intent.getStringExtra("door")
 
-        manager.addEvent(Constants.SOCKET_START_DOOR){
+        manager.addEvent(Constants.SOCKET_START_DOOR) {
             CoroutineScope(Dispatchers.Main).launch {
-                if(it[0] == binding.setTimeStartHour.text.toString().toInt() * 100) {
-                    MyApp.pref.startDoor = (binding.setTimeStartHour.text.toString().toInt() * 100).toString()
-                    MyApp.pref.endDoor = (binding.setTimeEndHour.text.toString().toInt() * 100).toString()
+                if (it[0] == ((binding.setTimeStartHour.text.toString()
+                        .toInt() * 100) + binding.setTimeStartMin.text.toString().toInt())
+                ) {
+                    MyApp.pref.startDoor =
+                        ((binding.setTimeStartHour.text.toString()
+                            .toInt() * 100) + binding.setTimeStartMin.text.toString()
+                            .toInt()).toString()
+                    MyApp.pref.endDoor =
+                        ((binding.setTimeEndHour.text.toString()
+                            .toInt() * 100) + binding.setTimeEndMin.text.toString()
+                            .toInt()).toString()
                     Toast.makeText(this@SetTimeActivity, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@SetTimeActivity, SetDoorActivity::class.java).putExtra("door", isFirst))
+                    startActivity(
+                        Intent(
+                            this@SetTimeActivity,
+                            SetDoorActivity::class.java
+                        ).putExtra("door", isFirst)
+                    )
                     finish()
                     Log.d("TAG", "사라짐")
-                }else{
+                } else {
                     Toast.makeText(this@SetTimeActivity, "설정에 실패하였습니다..", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -47,11 +60,28 @@ class SetTimeActivity : AppCompatActivity() {
 
         with(binding) {
             setTimeNext.setOnClickListener {
-                if(!setTimeStartHour.text.isNullOrEmpty() && !setTimeEndHour.text.isNullOrEmpty() && setTimeStartHour.text.toString().toInt() < 24 && setTimeEndHour.text.toString().toInt() < 24) {
-                    manager.emit(Constants.SOCKET_START_DOOR, setTimeStartHour.text.toString().toInt() * 100)
-                    manager.emit(Constants.SOCKET_END_DOOR, setTimeEndHour.text.toString().toInt() * 100)
-                }else{
-                    Toast.makeText(applicationContext, "올바른 시간을 설정해 주십시오", Toast.LENGTH_SHORT).show()
+                if (!setTimeStartHour.text.isNullOrEmpty()
+                    && !setTimeEndHour.text.isNullOrEmpty()
+                    && setTimeStartHour.text.toString().toInt() < 24
+                    && setTimeEndHour.text.toString().toInt() < 24
+                    && !setTimeStartMin.text.isNullOrEmpty()
+                    && !setTimeEndMin.text.isNullOrEmpty()
+                    && setTimeStartMin.text.toString().toInt() < 60
+                    && setTimeEndMin.text.toString().toInt() < 60
+                ) {
+                    manager.emit(
+                        Constants.SOCKET_START_DOOR, ((setTimeStartHour.text.toString()
+                            .toInt() * 100) + setTimeStartMin.text.toString()
+                            .toInt())
+                    )
+                    manager.emit(
+                        Constants.SOCKET_END_DOOR, ((setTimeEndHour.text.toString()
+                            .toInt() * 100) + setTimeEndMin.text.toString()
+                            .toInt())
+                    )
+                } else {
+                    Toast.makeText(applicationContext, "올바른 시간을 설정해 주십시오", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
